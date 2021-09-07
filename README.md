@@ -151,7 +151,7 @@ Iris+AntdVue前后端分离版 | 采用Iris、Vue、AntDesign等框架研发前�
 如果你发现了一个安全漏洞或缺陷，请发送邮件到 easygoadmin@163.com,所有的安全漏洞都将及时得到解决。
 
 ## ✨  特别鸣谢
-感谢[Gin](https://gin-gonic.com/)、[VueJs](https://cn.vuejs.org/)、[ElementUI](https://element.eleme.cn/#/)等优秀开源项目。
+感谢[Gin](https://gin-gonic.com/)、[Xorm](https://xorm.io/)、[VueJs](https://cn.vuejs.org/)、[ElementUI](https://element.eleme.cn/#/)等优秀开源项目。
 
 ## 📚 版权信息
 
