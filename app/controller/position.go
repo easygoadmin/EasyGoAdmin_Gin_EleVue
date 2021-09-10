@@ -1,8 +1,8 @@
 /**
  *
  * @author 摆渡人
- * @since 2021/8/20
- * @File : level
+ * @since 2021/9/10
+ * @File : position
  */
 package controller
 
@@ -15,23 +15,22 @@ import (
 	"net/http"
 )
 
-var Level = new(levelCtl)
+var Position = new(positionCtl)
 
-type levelCtl struct{}
+type positionCtl struct{}
 
-func (c *levelCtl) List(ctx *gin.Context) {
+func (c *positionCtl) List(ctx *gin.Context) {
 	// 参数绑定
-	var req *dto.LevelPageReq
+	var req *dto.PositionPageReq
 	if err := ctx.ShouldBind(&req); err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
 			Msg:  err.Error(),
 		})
-		return
 	}
 
-	// 调用获取列表方法
-	list, count, err := service.Level.GetList(req)
+	// 调用查询列表方法
+	list, count, err := service.Position.GetList(req)
 	if err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -43,15 +42,15 @@ func (c *levelCtl) List(ctx *gin.Context) {
 	// 返回结果
 	ctx.JSON(http.StatusOK, common.JsonResult{
 		Code:  0,
-		Data:  list,
 		Msg:   "操作成功",
+		Data:  list,
 		Count: count,
 	})
 }
 
-func (c *levelCtl) Add(ctx *gin.Context) {
+func (c *positionCtl) Add(ctx *gin.Context) {
 	// 参数绑定
-	var req *dto.LevelAddReq
+	var req *dto.PositionAddReq
 	if err := ctx.ShouldBind(&req); err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -61,7 +60,7 @@ func (c *levelCtl) Add(ctx *gin.Context) {
 	}
 
 	// 调用添加方法
-	rows, err := service.Level.Add(req, utils.Uid(ctx))
+	rows, err := service.Position.Add(req, utils.Uid(ctx))
 	if err != nil || rows == 0 {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -77,9 +76,9 @@ func (c *levelCtl) Add(ctx *gin.Context) {
 	})
 }
 
-func (c *levelCtl) Update(ctx *gin.Context) {
+func (c *positionCtl) Update(ctx *gin.Context) {
 	// 参数绑定
-	var req *dto.LevelUpdateReq
+	var req *dto.PositionUpdateReq
 	if err := ctx.ShouldBind(&req); err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -89,7 +88,7 @@ func (c *levelCtl) Update(ctx *gin.Context) {
 	}
 
 	// 调用更新方法
-	rows, err := service.Level.Update(req, utils.Uid(ctx))
+	rows, err := service.Position.Update(req, utils.Uid(ctx))
 	if err != nil || rows == 0 {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -105,25 +104,16 @@ func (c *levelCtl) Update(ctx *gin.Context) {
 	})
 }
 
-func (c *levelCtl) Delete(ctx *gin.Context) {
+func (c *positionCtl) Delete(ctx *gin.Context) {
 	// 记录ID
 	ids := ctx.Param("ids")
-	if ids == "" {
-		ctx.JSON(http.StatusOK, common.JsonResult{
-			Code: -1,
-			Msg:  "记录ID不能为空",
-		})
-		return
-	}
-
 	// 调用删除方法
-	rows, err := service.Level.Delete(ids)
+	rows, err := service.Position.Delete(ids)
 	if err != nil || rows == 0 {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
 			Msg:  err.Error(),
 		})
-		return
 	}
 
 	// 返回结果
@@ -133,9 +123,9 @@ func (c *levelCtl) Delete(ctx *gin.Context) {
 	})
 }
 
-func (c *levelCtl) Status(ctx *gin.Context) {
+func (c *positionCtl) Status(ctx *gin.Context) {
 	// 参数绑定
-	var req *dto.LevelStatusReq
+	var req *dto.PositionStatusReq
 	if err := ctx.ShouldBind(&req); err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -145,17 +135,5 @@ func (c *levelCtl) Status(ctx *gin.Context) {
 	}
 
 	// 调用设置状态方法
-	rows, err := service.Level.Status(req, utils.Uid(ctx))
-	if err != nil || rows == 0 {
-		ctx.JSON(http.StatusOK, common.JsonResult{
-			Code: -1,
-			Msg:  err.Error(),
-		})
-		return
-	}
-	// 返回结果
-	ctx.JSON(http.StatusOK, common.JsonResult{
-		Code: 0,
-		Msg:  "设置成功",
-	})
+
 }

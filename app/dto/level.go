@@ -15,9 +15,9 @@ type LevelPageReq struct {
 
 // 添加职级
 type LevelAddReq struct {
-	Name   string `form:"name"  binding:"required#职级名称不能为空"`
-	Status int    `form:"status"    binding:"required#职级状态不能为空"`
-	Sort   int    `form:"sort"  binding:"required#显示顺序不能为空"`
+	Name   string `form:"name"  binding:"required"`
+	Status int    `form:"status"    binding:"required"`
+	Sort   int    `form:"sort"  binding:"required"`
 }
 
 // 编辑职级
@@ -28,13 +28,8 @@ type LevelUpdateReq struct {
 	Sort   int    `form:"sort"  binding:"required"`
 }
 
-// 删除职级
-type LevelDeleteReq struct {
-	Ids string `form:"ids"  binding:"required#请选择要删除的数据记录"`
-}
-
 // 设置状态
 type LevelStatusReq struct {
-	Id     int `form:"id" binding:"required#主键ID不能为空"`
-	Status int `form:"status"    binding:"required#职级状态不能为空"`
+	Id     int `form:"id" binding:"required"`
+	Status int `form:"status"    binding:"required"`
 }

@@ -8,8 +8,9 @@ package main
 
 import (
 	_ "easygoadmin/boot"
-	cfg "easygoadmin/library/cfg"
+	"easygoadmin/library/cfg"
 	_ "easygoadmin/router"
+	_ "easygoadmin/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -25,29 +26,11 @@ func main() {
 		return
 	}
 
-	//r := gin.Default()
-	//// 指定模板加载目录
-	//r.LoadHTMLGlob("views/**/*")
-	//r.GET("/ping", func(c *gin.Context) {
-	//	c.JSON(200, gin.H{
-	//		"message": "pong",
-	//	})
-	//})
+	//dataSourceName格式：[username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
 
-	//r.GET("/", func(context *gin.Context) {
+	//DbEngine.SetMapper(core.SameMapper{})
 	//
-	//	context.HTML(http.StatusOK, "level/index.html", gin.H{
-	//
-	//		"title": "main.html title",
-	//
-	//		"content_before": "content 内容上部分",
-	//
-	//		"content_text": "content 内容部分",
-	//
-	//		"content_after": "content 内容下部分",
-	//	})
-	//
-	//})
+	//tbMapper := core.NewPrefixMapper(core.SnakeMapper{}, "sys_")
+	//DbEngine.SetTableMapper(tbMapper)
 
-	//r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

@@ -1,8 +1,8 @@
 /**
  *
  * @author 摆渡人
- * @since 2021/8/20
- * @File : level
+ * @since 2021/9/10
+ * @File : position
  */
 package service
 
@@ -10,44 +10,43 @@ import (
 	"easygoadmin/app/dto"
 	"easygoadmin/app/model"
 	"easygoadmin/utils"
-	"easygoadmin/utils/convert"
 	"easygoadmin/utils/gconv"
 	"errors"
+	"strings"
 	"time"
 )
 
-// 中间件管理服务
-var Level = new(levelService)
+var Position = new(positionService)
 
-type levelService struct{}
+type positionService struct{}
 
-func (s *levelService) GetList(req *dto.LevelPageReq) ([]model.Level, int64, error) {
+func (s *positionService) GetList(req *dto.PositionPageReq) ([]model.Position, int64, error) {
 	// 初始化查询实例
 	query := utils.XormDb.Where("mark=1")
+	// 查询条件
 	if req != nil {
-		// 职级名称查询
+		// 岗位名称
 		if req.Name != "" {
 			query = query.Where("name like ?", "%"+req.Name+"%")
 		}
 	}
 	// 排序
-	query = query.Asc("sort")
-	// 分页设置
+	query = query.OrderBy("sort")
+	// 分页
 	offset := (req.Page - 1) * req.Limit
 	query = query.Limit(req.Limit, offset)
-	// 查询列表
-	list := make([]model.Level, 0)
+	// 查询数据
+	var list []model.Position
 	count, err := query.FindAndCount(&list)
 	if err != nil {
 		return nil, 0, err
 	}
-	// 返回结果
 	return list, count, nil
 }
 
-func (s *levelService) Add(req *dto.LevelAddReq, userId int) (int64, error) {
-	// 实例化对象
-	var entity model.Level
+func (s *positionService) Add(req *dto.PositionAddReq, userId int) (int64, error) {
+	// 实例化模型
+	var entity model.Position
 	entity.Name = req.Name
 	entity.Status = req.Status
 	entity.Sort = req.Sort
@@ -56,15 +55,15 @@ func (s *levelService) Add(req *dto.LevelAddReq, userId int) (int64, error) {
 	entity.Mark = 1
 	// 插入数据
 	rows, err := entity.Insert()
-	if err != nil || rows == 0 {
+	if err != nil {
 		return 0, err
 	}
 	return rows, nil
 }
 
-func (s *levelService) Update(req *dto.LevelUpdateReq, userId int) (int64, error) {
+func (s *positionService) Update(req *dto.PositionUpdateReq, userId int) (int64, error) {
 	// 查询记录
-	entity := &model.Level{Id: req.Id}
+	entity := &model.Position{Id: req.Id}
 	has, err := entity.Get()
 	if err != nil || !has {
 		return 0, errors.New("记录不存在")
@@ -74,17 +73,15 @@ func (s *levelService) Update(req *dto.LevelUpdateReq, userId int) (int64, error
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
 	entity.UpdateTime = time.Now()
-	// 更新记录
 	return entity.Update()
 }
 
-// 删除
-func (s *levelService) Delete(ids string) (int64, error) {
+func (s *positionService) Delete(ids string) (int64, error) {
 	// 记录ID
-	idsArr := convert.ToInt64Array(ids, ",")
+	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
 		// 单个删除
-		entity := &model.Level{Id: gconv.Int(ids)}
+		entity := model.Position{Id: gconv.Int(ids)}
 		rows, err := entity.Delete()
 		if err != nil || rows == 0 {
 			return 0, errors.New("删除失败")
@@ -96,22 +93,6 @@ func (s *levelService) Delete(ids string) (int64, error) {
 	}
 }
 
-func (s *levelService) Status(req *dto.LevelStatusReq, userId int) (int64, error) {
-	// 查询记录是否存在
-	info := &model.Level{Id: req.Id}
-	has, err := info.Get()
-	if err != nil || !has {
-		return 0, err
-	}
-	if info == nil {
-		return 0, errors.New("记录不存在")
-	}
+func (s *positionService) Status(req *dto.PositionStatusReq, userId int) (int64, error) {
 
-	// 设置状态
-	entity := &model.Level{}
-	entity.Id = info.Id
-	entity.Status = req.Status
-	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
-	return entity.Update()
 }

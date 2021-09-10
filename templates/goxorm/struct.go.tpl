@@ -3,7 +3,7 @@ package {{.Models}}
 {{$ilen := len .Imports}}
 {{if gt $ilen 0}}
 import (
-    "easygoadmin/library/db"
+    "easygoadmin/utils"
 	{{range .Imports}}"{{.}}"{{end}}
 )
 {{end}}
@@ -15,28 +15,29 @@ type {{Mapper .Name}} struct {
 {{end}}
 }
 
-func ({{Mapper .Name}}) TableName() string {
-    return "sys_{{$table.Name}}"
-}
-
-// 根据结构体中已有的非空数据来获得单条数据
-func (r *{{Mapper .Name}}) FindOne() (bool, error) {
-	return db.Instance().Engine().Table(r.TableName()).Get(r)
+// 根据条件查询单条数据
+func (r *{{Mapper .Name}}) Get() (bool, error) {
+	return utils.XormDb.Get(r)
 }
 
 // 插入数据
 func (r *{{Mapper .Name}}) Insert() (int64, error) {
-	return db.Instance().Engine().Table(r.TableName()).Insert(r)
+	return utils.XormDb.Insert(r)
 }
 
 // 更新数据
 func (r *{{Mapper .Name}}) Update() (int64, error) {
-	return db.Instance().Engine().Table(r.TableName()).ID(r.Id).Update(r)
+	return utils.XormDb.Id(r.Id).Update(r)
 }
 
 // 删除
 func (r *{{Mapper .Name}}) Delete() (int64, error) {
-	return db.Instance().Engine().Table(r.TableName()).ID(r.Id).Delete(r)
+	return utils.XormDb.Id(r.Id).Delete(&{{Mapper .Name}}{})
+}
+
+//批量删除
+func (r *{{Mapper .Name}}) BatchDelete(ids ...int64) (int64, error) {
+	return utils.XormDb.In("id", ids).Delete(&{{Mapper .Name}}{})
 }
 {{end}}
 

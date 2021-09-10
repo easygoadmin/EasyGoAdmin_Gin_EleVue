@@ -194,3 +194,18 @@ func Float64(any interface{}) float64 {
 		return v
 	}
 }
+
+// Bytes converts <i> to []byte.
+func Bytes(i interface{}) []byte {
+	if i == nil {
+		return nil
+	}
+	switch value := i.(type) {
+	case string:
+		return []byte(value)
+	case []byte:
+		return value
+	default:
+		return nil
+	}
+}
