@@ -9,7 +9,7 @@ type DictData struct {
 	Id         int       `json:"id" xorm:"not null pk autoincr comment('主键ID') INT(11)"`
 	Name       string    `json:"name" xorm:"not null comment('字典项名称') unique VARCHAR(50)"`
 	Code       string    `json:"code" xorm:"not null comment('字典项值') VARCHAR(50)"`
-	DictId     int       `json:"dict_id" xorm:"not null default 0 comment('字典类型ID') INT(11)"`
+	DictId     int       `json:"dictId" xorm:"not null default 0 comment('字典类型ID') INT(11)"`
 	Status     int       `json:"status" xorm:"not null default 1 comment('状态：1在用 2停用') TINYINT(1)"`
 	Note       string    `json:"note" xorm:"default 'NULL' comment('备注') VARCHAR(300)"`
 	Sort       int       `json:"sort" xorm:"not null default 125 comment('显示顺序') SMALLINT(5)"`

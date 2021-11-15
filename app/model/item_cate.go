@@ -9,10 +9,10 @@ type ItemCate struct {
 	Id         int       `json:"id" xorm:"not null pk autoincr comment('ID') INT(11)"`
 	Name       string    `json:"name" xorm:"default 'NULL' comment('栏目名称') VARCHAR(30)"`
 	Pid        int       `json:"pid" xorm:"default 0 comment('父级ID') index INT(11)"`
-	ItemId     int       `json:"item_id" xorm:"default 0 comment('站点ID') index INT(11)"`
+	ItemId     int       `json:"itemId" xorm:"default 0 comment('站点ID') index INT(11)"`
 	Pinyin     string    `json:"pinyin" xorm:"default 'NULL' comment('拼音(全)') VARCHAR(50)"`
 	Code       string    `json:"code" xorm:"default 'NULL' comment('拼音(简)') VARCHAR(10)"`
-	IsCover    int       `json:"is_cover" xorm:"not null comment('是否有封面：1是 2否') TINYINT(1)"`
+	IsCover    int       `json:"isCover" xorm:"not null comment('是否有封面：1是 2否') TINYINT(1)"`
 	Cover      string    `json:"cover" xorm:"default 'NULL' comment('封面') VARCHAR(50)"`
 	Status     int       `json:"status" xorm:"default 1 comment('状态：1启用 2停用') TINYINT(1)"`
 	Note       string    `json:"note" xorm:"default 'NULL' comment('备注') VARCHAR(200)"`

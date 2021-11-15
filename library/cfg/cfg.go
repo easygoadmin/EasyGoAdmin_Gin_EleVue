@@ -2,6 +2,7 @@ package cfg
 
 import (
 	"github.com/BurntSushi/toml"
+	"os"
 	"sync"
 )
 
@@ -14,8 +15,8 @@ var (
 func Instance() *config {
 	once.Do(func() {
 		var conf config
-		//path, _ := os.Getwd()
-		filePath := "E:\\EasyGoAdmin\\EasyGoAdmin_Gin_EleVue\\config\\config.toml"
+		path, _ := os.Getwd()
+		filePath := path + "\\config\\config.toml"
 		if _, err := toml.DecodeFile(filePath, &conf); err != nil {
 			return
 		}
@@ -46,8 +47,8 @@ type logger struct {
 
 // 自定义配置
 type easygoadmin struct {
-	Version   string
-	Debug  bool
-	Image  string
+	Version string
+	Debug   bool
+	Image   string
 	Uploads string
 }

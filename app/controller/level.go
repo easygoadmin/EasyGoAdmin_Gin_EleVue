@@ -1,6 +1,6 @@
 /**
  *
- * @author 摆渡人
+ * @author 半城风雨
  * @since 2021/8/20
  * @File : level
  */
@@ -8,6 +8,7 @@ package controller
 
 import (
 	"easygoadmin/app/dto"
+	"easygoadmin/app/model"
 	"easygoadmin/app/service"
 	"easygoadmin/utils"
 	"easygoadmin/utils/common"
@@ -157,5 +158,16 @@ func (c *levelCtl) Status(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, common.JsonResult{
 		Code: 0,
 		Msg:  "设置成功",
+	})
+}
+
+func (c *levelCtl) GetLevelList(ctx *gin.Context) {
+	list := make([]model.Level, 0)
+	utils.XormDb.Where("status=1 and mark=1").Asc("sort").Find(&list)
+	// 返回结果
+	ctx.JSON(http.StatusOK, common.JsonResult{
+		Code: 0,
+		Msg:  "查询成功",
+		Data: list,
 	})
 }

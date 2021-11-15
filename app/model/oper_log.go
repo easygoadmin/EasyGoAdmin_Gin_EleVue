@@ -8,14 +8,14 @@ import (
 type OperLog struct {
 	Id           int64     `json:"id" xorm:"pk autoincr comment('主键ID') BIGINT(20)"`
 	Model        string    `json:"model" xorm:"not null comment('操作模块') VARCHAR(150)"`
-	OperType     int       `json:"oper_type" xorm:"not null default 0 comment('操作类型：0其它 1新增 2修改 3删除 4查询 5设置状态 6导入 7导出 8设置权限 9设置密码') INT(2)"`
-	OperMethod   string    `json:"oper_method" xorm:"default 'NULL' comment('操作方法') VARCHAR(30)"`
+	OperType     int       `json:"operType" xorm:"not null default 0 comment('操作类型：0其它 1新增 2修改 3删除 4查询 5设置状态 6导入 7导出 8设置权限 9设置密码') INT(2)"`
+	OperMethod   string    `json:"operMethod" xorm:"default 'NULL' comment('操作方法') VARCHAR(30)"`
 	Username     string    `json:"username" xorm:"default 'NULL' comment('操作账号') VARCHAR(255)"`
-	OperName     string    `json:"oper_name" xorm:"default 'NULL' comment('操作用户') VARCHAR(50)"`
-	OperUrl      string    `json:"oper_url" xorm:"default 'NULL' comment('请求URL') VARCHAR(255)"`
-	OperIp       string    `json:"oper_ip" xorm:"default '''' comment('主机地址') VARCHAR(50)"`
-	OperLocation string    `json:"oper_location" xorm:"default '''' comment('操作地点') VARCHAR(255)"`
-	RequestParam string    `json:"request_param" xorm:"default '''' comment('请求参数') VARCHAR(2000)"`
+	OperName     string    `json:"operName" xorm:"default 'NULL' comment('操作用户') VARCHAR(50)"`
+	OperUrl      string    `json:"operUrl" xorm:"default 'NULL' comment('请求URL') VARCHAR(255)"`
+	OperIp       string    `json:"operIp" xorm:"default '''' comment('主机地址') VARCHAR(50)"`
+	OperLocation string    `json:"operLocation" xorm:"default '''' comment('操作地点') VARCHAR(255)"`
+	RequestParam string    `json:"requestParam" xorm:"default '''' comment('请求参数') VARCHAR(2000)"`
 	Result       string    `json:"result" xorm:"default '''' comment('返回参数') VARCHAR(2000)"`
 	Status       int       `json:"status" xorm:"default 0 comment('日志状态：0正常日志 1错误日志') TINYINT(1)"`
 	UserAgent    string    `json:"user_agent" xorm:"default 'NULL' comment('代理信息') TEXT"`

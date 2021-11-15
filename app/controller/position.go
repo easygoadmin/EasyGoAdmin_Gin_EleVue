@@ -1,6 +1,6 @@
 /**
  *
- * @author 摆渡人
+ * @author 半城风雨
  * @since 2021/9/10
  * @File : position
  */
@@ -8,6 +8,7 @@ package controller
 
 import (
 	"easygoadmin/app/dto"
+	"easygoadmin/app/model"
 	"easygoadmin/app/service"
 	"easygoadmin/utils"
 	"easygoadmin/utils/common"
@@ -27,6 +28,7 @@ func (c *positionCtl) List(ctx *gin.Context) {
 			Code: -1,
 			Msg:  err.Error(),
 		})
+		return
 	}
 
 	// 调用查询列表方法
@@ -135,5 +137,30 @@ func (c *positionCtl) Status(ctx *gin.Context) {
 	}
 
 	// 调用设置状态方法
+	rows, err := service.Position.Status(req, utils.Uid(ctx))
+	if err != nil || rows == 0 {
+		ctx.JSON(http.StatusOK, common.JsonResult{
+			Code: -1,
+			Msg:  err.Error(),
+		})
+		return
+	}
 
+	// 返回结果
+	ctx.JSON(http.StatusOK, common.JsonResult{
+		Code: 0,
+		Msg:  "设置成功",
+	})
+}
+
+func (c *positionCtl) GetPositionList(ctx *gin.Context) {
+	// 查询岗位列表
+	list := make([]model.Position, 0)
+	utils.XormDb.Where("status=1 and mark=1").Asc("sort").Find(&list)
+	// 返回结果
+	ctx.JSON(http.StatusOK, common.JsonResult{
+		Code: 0,
+		Msg:  "查询成功",
+		Data: list,
+	})
 }

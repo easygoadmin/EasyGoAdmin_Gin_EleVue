@@ -1,6 +1,6 @@
 /**
  *
- * @author 摆渡人
+ * @author 半城风雨
  * @since 2021/9/10
  * @File : position
  */
@@ -38,10 +38,7 @@ func (s *positionService) GetList(req *dto.PositionPageReq) ([]model.Position, i
 	// 查询数据
 	var list []model.Position
 	count, err := query.FindAndCount(&list)
-	if err != nil {
-		return nil, 0, err
-	}
-	return list, count, nil
+	return list, count, err
 }
 
 func (s *positionService) Add(req *dto.PositionAddReq, userId int) (int64, error) {
@@ -54,11 +51,7 @@ func (s *positionService) Add(req *dto.PositionAddReq, userId int) (int64, error
 	entity.CreateTime = time.Now()
 	entity.Mark = 1
 	// 插入数据
-	rows, err := entity.Insert()
-	if err != nil {
-		return 0, err
-	}
-	return rows, nil
+	return entity.Insert()
 }
 
 func (s *positionService) Update(req *dto.PositionUpdateReq, userId int) (int64, error) {
@@ -73,6 +66,7 @@ func (s *positionService) Update(req *dto.PositionUpdateReq, userId int) (int64,
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
 	entity.UpdateTime = time.Now()
+	// 更新数据
 	return entity.Update()
 }
 
@@ -94,5 +88,19 @@ func (s *positionService) Delete(ids string) (int64, error) {
 }
 
 func (s *positionService) Status(req *dto.PositionStatusReq, userId int) (int64, error) {
+	// 查询记录
+	info := &model.Position{Id: req.Id}
+	has, err := info.Get()
+	if err != nil || !has {
+		return 0, errors.New("记录不存在")
+	}
+
+	// 更新状态
+	entity := &model.Position{}
+	entity.Id = req.Id
+	entity.Status = req.Status
+	entity.UpdateUser = userId
+	entity.UpdateTime = time.Now()
+	return entity.Update()
 
 }

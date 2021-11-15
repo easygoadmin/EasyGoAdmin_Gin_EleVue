@@ -10,8 +10,8 @@ type Link struct {
 	Name       string    `json:"name" xorm:"default 'NULL' comment('友链名称') VARCHAR(50)"`
 	Type       int       `json:"type" xorm:"not null default 1 comment('类型：1友情链接 2合作伙伴') TINYINT(1)"`
 	Url        string    `json:"url" xorm:"default 'NULL' comment('友链地址') VARCHAR(150)"`
-	ItemId     int       `json:"item_id" xorm:"not null default 0 comment('站点ID') INT(10)"`
-	CateId     int       `json:"cate_id" xorm:"not null default 0 comment('栏目ID') INT(10)"`
+	ItemId     int       `json:"itemId" xorm:"not null default 0 comment('站点ID') INT(10)"`
+	CateId     int       `json:"cateId" xorm:"not null default 0 comment('栏目ID') INT(10)"`
 	Platform   int       `json:"platform" xorm:"not null default 1 comment('平台：1PC站 2WAP站 3微信小程序 4APP应用') TINYINT(1)"`
 	Form       int       `json:"form" xorm:"not null default 1 comment('友链形式：1文字链接 2图片链接') TINYINT(1)"`
 	Image      string    `json:"image" xorm:"default 'NULL' comment('友链图片') VARCHAR(50)"`

@@ -14,9 +14,9 @@ type User struct {
 	Mobile       string    `json:"mobile" xorm:"default 'NULL' comment('手机号码') CHAR(11)"`
 	Email        string    `json:"email" xorm:"default 'NULL' comment('邮箱地址') VARCHAR(30)"`
 	Birthday     time.Time `json:"birthday" xorm:"default 'NULL' comment('出生日期') DATE"`
-	DeptId       int       `json:"dept_id" xorm:"default 0 comment('部门ID') INT(11)"`
-	LevelId      int       `json:"level_id" xorm:"default 0 comment('职级ID') INT(11)"`
-	PositionId   int       `json:"position_id" xorm:"default 0 comment('岗位ID') SMALLINT(3)"`
+	DeptId       int       `json:"deptId" xorm:"default 0 comment('部门ID') INT(11)"`
+	LevelId      int       `json:"levelId" xorm:"default 0 comment('职级ID') INT(11)"`
+	PositionId   int       `json:"positionId" xorm:"default 0 comment('岗位ID') SMALLINT(3)"`
 	ProvinceCode string    `json:"province_code" xorm:"default 'NULL' comment('省份编号') VARCHAR(50)"`
 	CityCode     string    `json:"city_code" xorm:"default 'NULL' comment('市区编号') VARCHAR(50)"`
 	DistrictCode string    `json:"district_code" xorm:"default 'NULL' comment('区县编号') VARCHAR(50)"`

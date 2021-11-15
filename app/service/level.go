@@ -1,6 +1,6 @@
 /**
  *
- * @author 摆渡人
+ * @author 半城风雨
  * @since 2021/8/20
  * @File : level
  */
@@ -10,9 +10,9 @@ import (
 	"easygoadmin/app/dto"
 	"easygoadmin/app/model"
 	"easygoadmin/utils"
-	"easygoadmin/utils/convert"
 	"easygoadmin/utils/gconv"
 	"errors"
+	"strings"
 	"time"
 )
 
@@ -38,11 +38,8 @@ func (s *levelService) GetList(req *dto.LevelPageReq) ([]model.Level, int64, err
 	// 查询列表
 	list := make([]model.Level, 0)
 	count, err := query.FindAndCount(&list)
-	if err != nil {
-		return nil, 0, err
-	}
 	// 返回结果
-	return list, count, nil
+	return list, count, err
 }
 
 func (s *levelService) Add(req *dto.LevelAddReq, userId int) (int64, error) {
@@ -55,11 +52,7 @@ func (s *levelService) Add(req *dto.LevelAddReq, userId int) (int64, error) {
 	entity.CreateTime = time.Now()
 	entity.Mark = 1
 	// 插入数据
-	rows, err := entity.Insert()
-	if err != nil || rows == 0 {
-		return 0, err
-	}
-	return rows, nil
+	return entity.Insert()
 }
 
 func (s *levelService) Update(req *dto.LevelUpdateReq, userId int) (int64, error) {
@@ -81,7 +74,7 @@ func (s *levelService) Update(req *dto.LevelUpdateReq, userId int) (int64, error
 // 删除
 func (s *levelService) Delete(ids string) (int64, error) {
 	// 记录ID
-	idsArr := convert.ToInt64Array(ids, ",")
+	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
 		// 单个删除
 		entity := &model.Level{Id: gconv.Int(ids)}
@@ -101,9 +94,6 @@ func (s *levelService) Status(req *dto.LevelStatusReq, userId int) (int64, error
 	info := &model.Level{Id: req.Id}
 	has, err := info.Get()
 	if err != nil || !has {
-		return 0, err
-	}
-	if info == nil {
 		return 0, errors.New("记录不存在")
 	}
 

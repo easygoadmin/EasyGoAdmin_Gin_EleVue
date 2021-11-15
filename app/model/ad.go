@@ -8,7 +8,7 @@ import (
 type Ad struct {
 	Id          int       `json:"id" xorm:"not null pk autoincr comment('主键ID') INT(10)"`
 	Title       string    `json:"title" xorm:"not null comment('广告标题') index VARCHAR(100)"`
-	AdSortId    int       `json:"ad_sort_id" xorm:"not null default 0 comment('广告位ID') index INT(11)"`
+	AdSortId    int       `json:"adSortId" xorm:"not null default 0 comment('广告位ID') index INT(11)"`
 	Cover       string    `json:"cover" xorm:"default 'NULL' comment('广告图片') VARCHAR(255)"`
 	Type        int       `json:"type" xorm:"not null default 0 comment('广告格式：1图片 2文字 3视频 4推荐') TINYINT(1)"`
 	Description string    `json:"description" xorm:"default 'NULL' comment('广告描述') VARCHAR(150)"`
@@ -16,9 +16,9 @@ type Ad struct {
 	Url         string    `json:"url" xorm:"default 'NULL' comment('广告链接') TEXT"`
 	Width       int       `json:"width" xorm:"not null default 0 comment('广告宽度') INT(10)"`
 	Height      int       `json:"height" xorm:"not null default 0 comment('广告高度') INT(10)"`
-	StartTime   time.Time `json:"start_time" xorm:"default 'NULL' comment('开始时间') DATETIME"`
-	EndTime     time.Time `json:"end_time" xorm:"default 'NULL' comment('结束时间') DATETIME"`
-	ViewNum     int       `json:"view_num" xorm:"not null default 0 comment('点击率') INT(10)"`
+	StartTime   time.Time `json:"startTime" xorm:"default 'NULL' comment('开始时间') DATETIME"`
+	EndTime     time.Time `json:"endTime" xorm:"default 'NULL' comment('结束时间') DATETIME"`
+	ViewNum     int       `json:"viewNum" xorm:"not null default 0 comment('点击率') INT(10)"`
 	Status      int       `json:"status" xorm:"not null default 1 comment('状态：1在用 2停用') TINYINT(1)"`
 	Sort        int       `json:"sort" xorm:"not null default 125 comment('排序') SMALLINT(5)"`
 	CreateUser  int       `json:"create_user" xorm:"not null default 0 comment('添加人') INT(10)"`

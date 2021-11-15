@@ -11,7 +11,7 @@ type ConfigData struct {
 	Code       string    `json:"code" xorm:"not null comment('配置编码') index VARCHAR(100)"`
 	Value      string    `json:"value" xorm:"default 'NULL' comment('配置值') TEXT"`
 	Options    string    `json:"options" xorm:"default 'NULL' comment('配置项') VARCHAR(255)"`
-	ConfigId   int       `json:"config_id" xorm:"not null default 0 comment('配置ID') INT(11)"`
+	ConfigId   int       `json:"configId" xorm:"not null default 0 comment('配置ID') INT(11)"`
 	Type       string    `json:"type" xorm:"not null comment('配置类型') VARCHAR(16)"`
 	Status     int       `json:"status" xorm:"not null default 1 comment('状态：1正常 2停用') TINYINT(1)"`
 	Sort       int       `json:"sort" xorm:"not null default 0 comment('排序') SMALLINT(3)"`

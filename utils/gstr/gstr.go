@@ -13,3 +13,38 @@ func Replace(origin, search, replace string, count ...int) string {
 	}
 	return strings.Replace(origin, search, replace, n)
 }
+
+func Equal(a, b string) bool {
+	return strings.EqualFold(a, b)
+}
+
+func Contains(str, substr string) bool {
+	return strings.Contains(str, substr)
+}
+
+func SubStr(str string, start int, length ...int) (substr string) {
+	lth := len(str)
+
+	// Simple border checks.
+	if start < 0 {
+		start = 0
+	}
+	if start >= lth {
+		start = lth
+	}
+	end := lth
+	if len(length) > 0 {
+		end = start + length[0]
+		if end < start {
+			end = lth
+		}
+	}
+	if end > lth {
+		end = lth
+	}
+	return str[start:end]
+}
+
+func Join(array []string, sep string) string {
+	return strings.Join(array, sep)
+}

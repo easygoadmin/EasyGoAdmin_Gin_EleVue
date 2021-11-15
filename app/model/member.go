@@ -5,12 +5,12 @@ import (
 	"time"
 )
 
-type UmsMember struct {
+type Member struct {
 	Id           int       `json:"id" xorm:"not null pk autoincr INT(11)"`
 	Openid       string    `json:"openid" xorm:"default 'NULL' comment('用户唯一标识') VARCHAR(50)"`
 	Username     string    `json:"username" xorm:"not null comment('用户名') index unique VARCHAR(30)"`
 	Password     string    `json:"password" xorm:"default 'NULL' comment('密码') CHAR(32)"`
-	MemberLevel  int       `json:"member_level" xorm:"not null default 0 comment('会员等级') SMALLINT(3)"`
+	MemberLevel  int       `json:"memberLevel" xorm:"not null default 0 comment('会员等级') SMALLINT(3)"`
 	Realname     string    `json:"realname" xorm:"default 'NULL' comment('真实姓名') VARCHAR(50)"`
 	Nickname     string    `json:"nickname" xorm:"default 'NULL' comment('用户昵称') VARCHAR(50)"`
 	Gender       int       `json:"gender" xorm:"not null default 3 comment('性别（1男 2女 3未知）') TINYINT(1)"`
@@ -27,12 +27,12 @@ type UmsMember struct {
 	PushAlias    string    `json:"push_alias" xorm:"default '''' comment('推送的别名') VARCHAR(40)"`
 	Source       int       `json:"source" xorm:"not null default 1 comment('来源：1、APP注册；2、后台添加；') TINYINT(1)"`
 	Status       int       `json:"status" xorm:"not null default 1 comment('是否启用 1、启用  2、停用') TINYINT(1)"`
-	AppVersion   string    `json:"app_version" xorm:"default '''' comment('客户端版本号') VARCHAR(30)"`
+	AppVersion   string    `json:"appVersion" xorm:"default '''' comment('客户端版本号') VARCHAR(30)"`
 	Code         string    `json:"code" xorm:"default 'NULL' comment('我的推广码') VARCHAR(10)"`
-	LoginIp      string    `json:"login_ip" xorm:"default 'NULL' comment('最近登录IP') VARCHAR(30)"`
-	LoginTime    time.Time `json:"login_time" xorm:"default 'NULL' comment('登录时间') DATETIME"`
-	LoginRegion  string    `json:"login_region" xorm:"default 'NULL' comment('上次登录地点') VARCHAR(20)"`
-	LoginCount   int       `json:"login_count" xorm:"not null default 0 comment('登录总次数') INT(10)"`
+	LoginIp      string    `json:"loginIp" xorm:"default 'NULL' comment('最近登录IP') VARCHAR(30)"`
+	LoginTime    time.Time `json:"loginTime" xorm:"default 'NULL' comment('登录时间') DATETIME"`
+	LoginRegion  string    `json:"loginRegion" xorm:"default 'NULL' comment('上次登录地点') VARCHAR(20)"`
+	LoginCount   int       `json:"loginCount" xorm:"not null default 0 comment('登录总次数') INT(10)"`
 	CreateUser   int       `json:"create_user" xorm:"not null default 0 comment('添加人') INT(11)"`
 	CreateTime   time.Time `json:"create_time" xorm:"default 'NULL' comment('创建时间') DATETIME"`
 	UpdateUser   int       `json:"update_user" xorm:"not null default 0 comment('修改人') INT(11)"`
@@ -41,26 +41,26 @@ type UmsMember struct {
 }
 
 // 根据条件查询单条数据
-func (r *UmsMember) Get() (bool, error) {
+func (r *Member) Get() (bool, error) {
 	return utils.XormDb.Get(r)
 }
 
 // 插入数据
-func (r *UmsMember) Insert() (int64, error) {
+func (r *Member) Insert() (int64, error) {
 	return utils.XormDb.Insert(r)
 }
 
 // 更新数据
-func (r *UmsMember) Update() (int64, error) {
+func (r *Member) Update() (int64, error) {
 	return utils.XormDb.Id(r.Id).Update(r)
 }
 
 // 删除
-func (r *UmsMember) Delete() (int64, error) {
-	return utils.XormDb.Id(r.Id).Delete(&UmsMember{})
+func (r *Member) Delete() (int64, error) {
+	return utils.XormDb.Id(r.Id).Delete(&Member{})
 }
 
 //批量删除
-func (r *UmsMember) BatchDelete(ids ...int64) (int64, error) {
-	return utils.XormDb.In("id", ids).Delete(&UmsMember{})
+func (r *Member) BatchDelete(ids ...int64) (int64, error) {
+	return utils.XormDb.In("id", ids).Delete(&Member{})
 }

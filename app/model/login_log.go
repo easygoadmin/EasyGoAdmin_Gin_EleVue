@@ -9,11 +9,11 @@ type LoginLog struct {
 	Id           int64     `json:"id" xorm:"pk autoincr comment('主键ID') BIGINT(20)"`
 	Username     string    `json:"username" xorm:"default 'NULL' comment('操作账号') VARCHAR(255)"`
 	Method       string    `json:"method" xorm:"default 'NULL' comment('操作方法') VARCHAR(30)"`
-	OperUrl      string    `json:"oper_url" xorm:"default 'NULL' comment('请求URL') VARCHAR(255)"`
-	OperIp       string    `json:"oper_ip" xorm:"default '''' comment('主机地址') VARCHAR(50)"`
-	OperLocation string    `json:"oper_location" xorm:"default '''' comment('操作地点') VARCHAR(255)"`
+	OperUrl      string    `json:"operUrl" xorm:"default 'NULL' comment('请求URL') VARCHAR(255)"`
+	OperIp       string    `json:"operIp" xorm:"default '''' comment('主机地址') VARCHAR(50)"`
+	OperLocation string    `json:"operLocation" xorm:"default '''' comment('操作地点') VARCHAR(255)"`
 	Os           string    `json:"os" xorm:"default 'NULL' comment('操作系统') VARCHAR(255)"`
-	RequestParam string    `json:"request_param" xorm:"default '''' comment('请求参数') VARCHAR(2000)"`
+	RequestParam string    `json:"requestParam" xorm:"default '''' comment('请求参数') VARCHAR(2000)"`
 	Browser      string    `json:"browser" xorm:"default 'NULL' comment('浏览器') VARCHAR(255)"`
 	Result       string    `json:"result" xorm:"default '''' comment('返回参数') VARCHAR(2000)"`
 	Status       int       `json:"status" xorm:"default 1 comment('操作状态：0操作成功 1操作失败') TINYINT(1)"`

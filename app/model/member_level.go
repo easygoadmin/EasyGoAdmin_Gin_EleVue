@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type UmsMemberLevel struct {
+type MemberLevel struct {
 	Id         int       `json:"id" xorm:"not null pk autoincr comment('主键ID') INT(11)"`
 	Name       string    `json:"name" xorm:"not null comment('级别名称') index VARCHAR(30)"`
 	Sort       int       `json:"sort" xorm:"not null default 125 comment('排序号') INT(11)"`
@@ -17,26 +17,26 @@ type UmsMemberLevel struct {
 }
 
 // 根据条件查询单条数据
-func (r *UmsMemberLevel) Get() (bool, error) {
+func (r *MemberLevel) Get() (bool, error) {
 	return utils.XormDb.Get(r)
 }
 
 // 插入数据
-func (r *UmsMemberLevel) Insert() (int64, error) {
+func (r *MemberLevel) Insert() (int64, error) {
 	return utils.XormDb.Insert(r)
 }
 
 // 更新数据
-func (r *UmsMemberLevel) Update() (int64, error) {
+func (r *MemberLevel) Update() (int64, error) {
 	return utils.XormDb.Id(r.Id).Update(r)
 }
 
 // 删除
-func (r *UmsMemberLevel) Delete() (int64, error) {
-	return utils.XormDb.Id(r.Id).Delete(&UmsMemberLevel{})
+func (r *MemberLevel) Delete() (int64, error) {
+	return utils.XormDb.Id(r.Id).Delete(&MemberLevel{})
 }
 
 //批量删除
-func (r *UmsMemberLevel) BatchDelete(ids ...int64) (int64, error) {
-	return utils.XormDb.In("id", ids).Delete(&UmsMemberLevel{})
+func (r *MemberLevel) BatchDelete(ids ...int64) (int64, error) {
+	return utils.XormDb.In("id", ids).Delete(&MemberLevel{})
 }

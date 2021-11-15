@@ -8,9 +8,9 @@ import (
 type AdSort struct {
 	Id          int       `json:"id" xorm:"not null pk autoincr comment('主键ID') INT(10)"`
 	Description string    `json:"description" xorm:"not null comment('广告位描述') VARCHAR(255)"`
-	ItemId      int       `json:"item_id" xorm:"not null default 0 comment('站点ID') INT(10)"`
-	CateId      int       `json:"cate_id" xorm:"not null default 0 comment('栏目ID') SMALLINT(5)"`
-	LocId       int       `json:"loc_id" xorm:"not null default 0 comment('广告页面位置') SMALLINT(5)"`
+	ItemId      int       `json:"itemId" xorm:"not null default 0 comment('站点ID') INT(10)"`
+	CateId      int       `json:"cateId" xorm:"not null default 0 comment('栏目ID') SMALLINT(5)"`
+	LocId       int       `json:"locId" xorm:"not null default 0 comment('广告页面位置') SMALLINT(5)"`
 	Platform    int       `json:"platform" xorm:"not null default 1 comment('站点类型：1PC网站 2WAP手机站 3微信小程序 4APP移动端') TINYINT(1)"`
 	Sort        int       `json:"sort" xorm:"not null default 125 comment('广告位排序') SMALLINT(5)"`
 	CreateUser  int       `json:"create_user" xorm:"default 0 comment('添加人') INT(10)"`
