@@ -11,12 +11,30 @@ import (
 	"easygoadmin/app/middleware"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"html/template"
+	"time"
 )
+
+// 日期格式转换
+func formatAsDate(t time.Time) string {
+	year, month, day := t.Date()
+	return fmt.Sprintf("%d-%d-%d", year, month, day)
+}
 
 func init() {
 	fmt.Println("路由已加载")
 	// 初始化
 	router := gin.Default()
+	//// 自定义标识符，因为默认{{}}这种标识在前端框架中也有使用，会产生冲突
+	//// 注意：改完标识符之后别忘了把模板里原先的标识符一起改掉
+	//router.Delims("{[", "]}")
+
+	// 自定义模板方法
+	router.SetFuncMap(template.FuncMap{
+		"formatAsDate": formatAsDate,
+	})
+	//// 指定模板加载目录
+	//router.LoadHTMLGlob("views/**")
 	// 跨域处理(要在路由组之前全局使用「跨域中间件」, 否则OPTIONS会返回404)
 	router.Use(middleware.Cros())
 	// 登录验证中间件
@@ -264,6 +282,13 @@ func init() {
 	{
 		configweb.GET("/index", controller.ConfigWeb.Index)
 		configweb.PUT("/save", controller.ConfigWeb.Save)
+	}
+
+	/* 代码生成器 */
+	generate := router.Group("generate")
+	{
+		generate.GET("/list", controller.Generate.List)
+		generate.POST("/generate", controller.Generate.Generate)
 	}
 
 	// 启动

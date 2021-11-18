@@ -16,6 +16,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -42,6 +43,23 @@ func Uid(ctx *gin.Context) int {
 	}
 	// 查询用户信息
 	return claim.UserId
+}
+
+// 获取数据库表
+func GetDatabase() (string, error) {
+	config := cfg.Instance()
+	if config == nil {
+		fmt.Printf("参数错误")
+	}
+
+	// 获取数据库连接
+	link := config.Database.Master
+	if link == "" {
+		return "", errors.New("数据库配置读取错误")
+	}
+	// 分裂字符串
+	linkArr := strings.Split(link, "/")
+	return strings.Split(linkArr[1], "?")[0], nil
 }
 
 func Md5(password string) (string, error) {

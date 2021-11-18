@@ -48,3 +48,7 @@ func SubStr(str string, start int, length ...int) (substr string) {
 func Join(array []string, sep string) string {
 	return strings.Join(array, sep)
 }
+
+func UcWords(str string) string {
+	return strings.Title(str)
+}
