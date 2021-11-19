@@ -291,3 +291,73 @@ func (s *userService) CheckUser(req *dto.CheckUserReq) (*model.User, error) {
 	}
 	return user, nil
 }
+
+func (s *userService) UpdateUserInfo(req *dto.UserInfoReq, userId int) (int64, error) {
+	// 头像处理
+	avatar := ""
+	if req.Avatar != "" {
+		image, err := utils.SaveImage(req.Avatar, "user")
+		if err != nil {
+			return 0, err
+		}
+		avatar = image
+	}
+
+	// 更新用户信息
+	rows, err := utils.XormDb.Id(userId).Update(&model.User{
+		Avatar:     avatar,
+		Realname:   req.Realname,
+		Nickname:   req.Nickname,
+		Gender:     req.Gender,
+		Mobile:     req.Mobile,
+		Email:      req.Email,
+		Address:    req.Address,
+		Intro:      req.Intro,
+		UpdateUser: userId,
+		UpdateTime: time.Now(),
+	})
+	if err != nil {
+		return 0, err
+	}
+	return rows, nil
+}
+
+func (s *userService) UpdatePwd(req *dto.UpdatePwd, userId int) (int64, error) {
+	// 查询信息
+	info := &model.User{Id: userId}
+	has, err := info.Get()
+	if err != nil || !has {
+		return 0, err
+	}
+	if info == nil {
+		return 0, errors.New("记录不存在")
+	}
+	// 比对旧密码
+	oldPwd, err := utils.Md5(req.OldPassword + info.Username)
+	if err != nil {
+		return 0, err
+	}
+	if oldPwd != info.Password {
+		return 0, errors.New("旧密码不正确")
+	}
+
+	// 设置新密码
+	if req.NewPassword != req.RePassword {
+		return 0, errors.New("两次输入的新密码不一致")
+	}
+	newPwd, err := utils.Md5(req.NewPassword + info.Username)
+	if err != nil {
+		return 0, err
+	}
+
+	// 更新密码
+	rows, err := utils.XormDb.Id(userId).Update(&model.User{
+		Password:   newPwd,
+		UpdateUser: userId,
+		UpdateTime: time.Now(),
+	})
+	if err != nil {
+		return 0, err
+	}
+	return rows, nil
+}

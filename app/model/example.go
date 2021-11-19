@@ -12,7 +12,7 @@ type Example struct {
 	Content    string    `json:"content" xorm:"default 'NULL' comment('内容') VARCHAR(255)"`
 	Status     int       `json:"status" xorm:"default 1 comment('状态：1正常 2停用') TINYINT(1)"`
 	Type       int       `json:"type" xorm:"default 1 comment('类型：1京东 2淘宝 3拼多多 4唯品会') INT(11)"`
-	IsVip      int       `json:"is_vip" xorm:"default 2 comment('是否VIP：1是 2否') TINYINT(1)"`
+	IsVip      int       `json:"isVip" xorm:"default 2 comment('是否VIP：1是 2否') TINYINT(1)"`
 	Sort       int       `json:"sort" xorm:"default 0 comment('排序号') INT(11)"`
 	CreateUser int       `json:"create_user" xorm:"default 0 comment('添加人') INT(11)"`
 	CreateTime time.Time `json:"create_time" xorm:"default 'NULL' comment('添加时间') DATETIME"`

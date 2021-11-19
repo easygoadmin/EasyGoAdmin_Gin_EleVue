@@ -52,3 +52,7 @@ func Join(array []string, sep string) string {
 func UcWords(str string) string {
 	return strings.Title(str)
 }
+
+func ToUpper(s string) string {
+	return strings.ToUpper(s)
+}

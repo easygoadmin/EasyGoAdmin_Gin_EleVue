@@ -76,3 +76,22 @@ type UserResetPwdReq struct {
 type CheckUserReq struct {
 	Username string `form:"username" binding:"required"` // 用户名
 }
+
+// 更新密码
+type UpdatePwd struct {
+	OldPassword string `form:"oldPassword"      binding:"required"` // 旧密码
+	NewPassword string `form:"newPassword"      binding:"required"` // 新密码
+	RePassword  string `form:"rePassword"       binding:"required"` // 确认密码
+}
+
+// 用户中心
+type UserInfoReq struct {
+	Avatar   string `form:"avatar"`                           // 头像
+	Realname string `form:"realname"      binding:"required"` // 真实姓名
+	Nickname string `form:"nickname"      binding:"required"` // 昵称
+	Gender   int    `form:"gender"        binding:"required"` // 性别:1男 2女 3保密
+	Mobile   string `form:"mobile"        binding:"required"` // 手机号码
+	Email    string `form:"email"         binding:"required"` // 邮箱地址
+	Address  string `form:"address"`                          // 详细地址
+	Intro    string `form:"intro"`                            // 个人简介
+}

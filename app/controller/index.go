@@ -7,6 +7,7 @@
 package controller
 
 import (
+	"easygoadmin/app/dto"
 	"easygoadmin/app/model"
 	"easygoadmin/app/service"
 	"easygoadmin/utils"
@@ -51,5 +52,71 @@ func (c *indexCtl) User(ctx *gin.Context) {
 		Code: 0,
 		Msg:  "操作成功",
 		Data: user,
+	})
+}
+
+// 个人中心
+func (c *indexCtl) UpdateUserInfo(ctx *gin.Context) {
+	// 参数验证
+	var req *dto.UserInfoReq
+	if err := ctx.ShouldBind(&req); err != nil {
+		ctx.JSON(http.StatusOK, common.JsonResult{
+			Code: -1,
+			Msg:  err.Error(),
+		})
+		return
+	}
+	// 更新信息
+	_, err := service.User.UpdateUserInfo(req, utils.Uid(ctx))
+	if err != nil {
+		ctx.JSON(http.StatusOK, common.JsonResult{
+			Code: -1,
+			Msg:  err.Error(),
+		})
+		return
+	}
+
+	// 返回结果
+	ctx.JSON(http.StatusOK, common.JsonResult{
+		Code: 0,
+		Msg:  "更新成功",
+	})
+}
+
+// 更新密码
+func (c *indexCtl) UpdatePwd(ctx *gin.Context) {
+	// 参数验证
+	var req *dto.UpdatePwd
+	if err := ctx.ShouldBind(&req); err != nil {
+		ctx.JSON(http.StatusOK, common.JsonResult{
+			Code: -1,
+			Msg:  err.Error(),
+		})
+		return
+	}
+
+	// 调用更新密码方法
+	rows, err := service.User.UpdatePwd(req, utils.Uid(ctx))
+	if err != nil || rows == 0 {
+		ctx.JSON(http.StatusOK, common.JsonResult{
+			Code: -1,
+			Msg:  err.Error(),
+		})
+		return
+	}
+
+	// 返回结果
+	ctx.JSON(http.StatusOK, common.JsonResult{
+		Code: 0,
+		Msg:  "更新密码成功",
+	})
+}
+
+// 注销系统
+func (c *indexCtl) Logout(ctx *gin.Context) {
+	// 注销系统并返回提示
+	ctx.JSON(http.StatusOK, common.JsonResult{
+		Code: 0,
+		Msg:  "注销成功",
 	})
 }

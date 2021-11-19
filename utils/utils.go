@@ -163,7 +163,7 @@ func CreateDir(path string) bool {
 	if IsExist(path) {
 		return true
 	}
-	// 创建文件夹
+	// 创建多层级目录
 	err2 := os.MkdirAll(path, os.ModePerm)
 	if err2 != nil {
 		log.Println(err2)

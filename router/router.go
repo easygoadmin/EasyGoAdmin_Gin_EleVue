@@ -39,10 +39,25 @@ func init() {
 	router.Use(middleware.Cros())
 	// 登录验证中间件
 	router.Use(middleware.CheckLogin())
+	// 鉴权拦截器中间件
+	router.Use(middleware.CheckAuth())
+
+	//// 验证登录后放行路由请求
+	//router.Use(middleware.CheckLogin())
+	//{
+	//	// 写路由
+	//}
 
 	// 设置静态资源路由
 	router.Static("/resource", "./public/resource")
 	router.StaticFile("/favicon.ico", "./public/resource/images/favicon.ico")
+
+	/* 文件上传 */
+	upload := router.Group("upload")
+	{
+		// 上传图片
+		upload.POST("/uploadImage", controller.Upload.UploadImage)
+	}
 
 	// 登录注册
 	login := router.Group("/")
@@ -50,10 +65,9 @@ func init() {
 		login.GET("/captcha", controller.Login.Captcha)
 		login.GET("/", controller.Login.Login)
 		login.POST("/login", controller.Login.Login)
-		//login.GET("/index", controller.Index.Index)
-		//login.Any("/updateUserInfo", controller.Index.UpdateUserInfo)
-		//login.Any("/updatePwd", controller.Index.UpdatePwd)
-		//login.GET("/logout", controller.Index.Logout)
+		login.Any("/updateUserInfo", controller.Index.UpdateUserInfo)
+		login.Any("/updatePwd", controller.Index.UpdatePwd)
+		login.GET("/logout", controller.Index.Logout)
 	}
 
 	// 系统主页
@@ -67,7 +81,7 @@ func init() {
 	user := router.Group("user")
 	{
 		user.GET("/list", controller.User.List)
-		user.GET("/detail", controller.User.Detail)
+		user.GET("/detail/:id", controller.User.Detail)
 		user.POST("/add", controller.User.Add)
 		user.PUT("/update", controller.User.Update)
 		user.DELETE("/delete/:ids", controller.User.Delete)
@@ -289,6 +303,18 @@ func init() {
 	{
 		generate.GET("/list", controller.Generate.List)
 		generate.POST("/generate", controller.Generate.Generate)
+	}
+
+	/* 演示一 */
+	example := router.Group("example")
+	{
+		example.GET("/list", controller.Example.List)
+		example.POST("/add", controller.Example.Add)
+		example.PUT("/update", controller.Example.Update)
+		example.DELETE("/delete/:ids", controller.Example.Delete)
+
+		example.PUT("/status", controller.Example.Status)
+		example.PUT("/isVip", controller.Example.IsVip)
 	}
 
 	// 启动
