@@ -18,7 +18,7 @@
 /**
  * 演示二Vo
  * @author 半城风雨
- * @since 2021-11-19
+ * @since 2021-11-20
  * @File : example2
  */
 package vo
@@ -28,6 +28,6 @@ import "easygoadmin/app/model"
 // 演示二信息Vo
 type Example2InfoVo struct {
 	model.Example2
-
+	
 	StatusName int `json:"statusName"` // 状态名称
 }

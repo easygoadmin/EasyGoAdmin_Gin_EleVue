@@ -134,11 +134,11 @@ func (s *generateService) Generate(ctx *gin.Context) error {
 		return err
 	}
 
-	//// 生成菜单权限
-	//if err := GeneratePermission(moduleName, moduleTitle, utils.Uid(ctx)); err != nil {
-	//	return err
-	//}
-	//
+	// 生成菜单权限
+	if err := GeneratePermission(moduleName, moduleTitle, utils.Uid(ctx)); err != nil {
+		return err
+	}
+
 	// 生成路由
 	if err := GenerateRouter(columnList, authorName, moduleName, moduleTitle); err != nil {
 		return err
@@ -569,8 +569,8 @@ func GenerateEdit(dataList *common.ArrayList, moduleName string, moduleTitle str
 // 生成菜单和权限
 func GeneratePermission(modelName string, modelTitle string, userId int) error {
 	// 查询记录
-	info := &model.Menu{}
-	has, err := utils.XormDb.Where("permission", "sys:"+modelName+":index").Get(&info)
+	info := &model.Menu{Permission: "sys:" + modelName + ":view"}
+	has, err := info.Get()
 	if err != nil || !has {
 		return err
 	}
@@ -596,7 +596,6 @@ func GeneratePermission(modelName string, modelTitle string, userId int) error {
 	// 插入或更新记录
 	if info == nil {
 		// 创建菜单
-		// 插入记录
 		_, err := utils.XormDb.Insert(entity)
 		if err != nil {
 			return err
@@ -605,19 +604,17 @@ func GeneratePermission(modelName string, modelTitle string, userId int) error {
 		menuId = entity.Id
 	} else {
 		// 更新菜单
-		entity.Id = info.Id
-		// 更新记录
-		_, err := utils.XormDb.Update(entity)
+		_, err := utils.XormDb.Id(info.Id).Update(entity)
 		if err != nil {
 			return err
 		}
 		// 菜单ID
-		menuId = entity.Id
+		menuId = info.Id
 	}
 
 	// 删除现有节点
-	menu := &model.Menu{}
-	utils.XormDb.Where("parent_id=?", menuId).Delete(&menu)
+	menu := &model.Menu{ParentId: menuId}
+	menu.Delete()
 
 	// 创建节点
 	funcList := []int{1, 5, 10, 15, 20, 25, 30}

@@ -18,7 +18,7 @@
 /**
  * 演示二管理-服务类
  * @author 半城风雨
- * @since 2021-11-19
+ * @since 2021-11-20
  * @File : example2
  */
 package service
@@ -71,9 +71,6 @@ func (s *example2Service) GetList(req *dto.Example2PageReq) ([]vo.Example2InfoVo
 }
 
 func (s *example2Service) Add(req *dto.Example2AddReq, userId int) (int64, error) {
-	if utils.AppDebug() {
-		return 0, errors.New("演示环境，暂无权限操作")
-	}
 	// 实例化对象
 	var entity model.Example2
 
@@ -88,9 +85,6 @@ func (s *example2Service) Add(req *dto.Example2AddReq, userId int) (int64, error
 }
 
 func (s *example2Service) Update(req *dto.Example2UpdateReq, userId int) (int64, error) {
-	if utils.AppDebug() {
-		return 0, errors.New("演示环境，暂无权限操作")
-	}
 	// 查询记录
 	entity := &model.Example2{Id: req.Id}
 	has, err := entity.Get()
@@ -109,9 +103,6 @@ func (s *example2Service) Update(req *dto.Example2UpdateReq, userId int) (int64,
 
 // 删除
 func (s *example2Service) Delete(ids string) (int64, error) {
-	if utils.AppDebug() {
-		return 0, errors.New("演示环境，暂无权限操作")
-	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -129,9 +120,6 @@ func (s *example2Service) Delete(ids string) (int64, error) {
 }
 
 func (s *example2Service) Status(req *dto.Example2StatusReq, userId int) (int64, error) {
-	if utils.AppDebug() {
-		return 0, errors.New("演示环境，暂无权限操作")
-	}
 	// 查询记录是否存在
 	info := &model.Example2{Id: req.Id}
 	has, err := info.Get()
