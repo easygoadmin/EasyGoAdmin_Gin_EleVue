@@ -76,8 +76,8 @@ func (s *adService) GetList(req *dto.AdPageReq) ([]vo.AdInfoVo, int64, error) {
 		}
 		// 所属广告位
 		if v.AdSortId > 0 {
-			adSortInfo := &model.AdSort{}
-			has, err := utils.XormDb.Id(v.AdSortId).Get(&adSortInfo)
+			adSortInfo := &model.AdSort{Id: v.AdSortId}
+			has, err := adSortInfo.Get()
 			if err == nil && has {
 				item.AdSortDesc = adSortInfo.Description + " >> " + gconv.String(adSortInfo.LocId)
 			}
