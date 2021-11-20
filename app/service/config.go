@@ -54,7 +54,7 @@ func (s *configService) Add(req *dto.ConfigAddReq, userId int) (int64, error) {
 	entity.Name = req.Name
 	entity.Sort = req.Sort
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 插入记录
@@ -73,7 +73,7 @@ func (s *configService) Update(req *dto.ConfigUpdateReq, userId int) (int64, err
 	entity.Name = req.Name
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 更新数据
 	return entity.Update()

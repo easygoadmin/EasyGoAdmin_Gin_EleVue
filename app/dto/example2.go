@@ -1,7 +1,7 @@
 // +----------------------------------------------------------------------
 // | EasyGoAdmin敏捷开发框架 [ EasyGoAdmin ]
 // +----------------------------------------------------------------------
-// | 版权所有 2019~2021 EasyGoAdmin深圳研发中心
+// | 版权所有 2021 EasyGoAdmin深圳研发中心
 // +----------------------------------------------------------------------
 // | 官方网站: http://www.easygoadmin.vip
 // +----------------------------------------------------------------------
@@ -15,35 +15,42 @@
 // | 许的合法合规的软件产品研发，详细声明内容请阅读《框架免责声明》附件；
 // +----------------------------------------------------------------------
 
-/**
- * 演示一-路由
- * @author 半城风雨
- * @since 2021-11-19
- * @File : example
- */
-package router
+package dto
 
-import (
-	"easygoadmin/app/controller"
-	"fmt"
-	"github.com/gin-gonic/gin"
-)
+// 分页查询
+type Example2PageReq struct {
+	Name string `form:"name"` // 演示名称
 
-func init() {
-	fmt.Println("模块路由初始化")
+	Status int `form:status` // 状态：1正常 2停用
 
-	// 初始化
-	router := gin.Default()
+	Page  int `form:"page"`  // 页码
+	Limit int `form:"limit"` // 每页数
+}
 
-	/* 演示一 */
-	example := router.Group("example")
-	{
-		example.GET("/list", controller.Example.List)
-		example.POST("/add", controller.Example.Add)
-		example.PUT("/update", controller.Example.Update)
-		example.DELETE("/delete/:ids", controller.Example.Delete)
+// 添加演示二
+type Example2AddReq struct {
+	Name string `form:"name"        binding:"required"` // 演示名称
 
-		example.PUT("/status", controller.Example.Status)
-		example.PUT("/isVip", controller.Example.IsVip)
-	}
+	Status int `form:"status"        binding:"required"` // 状态：1正常 2停用
+
+	Sort int `form:"sort"        binding:"required"` // 排序号
+
+}
+
+// 编辑演示二
+type Example2UpdateReq struct {
+	Id int `form:"id" binding:"required"`
+
+	Name string `form:"name"        binding:"required"` // 演示名称
+
+	Status int `form:"status"        binding:"required"` // 状态：1正常 2停用
+
+	Sort int `form:"sort"        binding:"required"` // 排序号
+
+}
+
+// 设置状态
+type Example2StatusReq struct {
+	Id     int `form:"id" 				binding:"required"`
+	Status int `form:"status"    		binding:"required"`
 }

@@ -48,7 +48,7 @@ type UserAddReq struct {
 	City       []string  `form:"city" binding:"required"` // 省市区
 	Address    string    `form:"address"`
 	Username   string    `form:"username" binding:"required"`
-	Password   string    `form:"password" binding:"required"`
+	Password   string    `form:"password"`
 	Intro      string    `form:"intro"`
 	Status     int       `form:"status" binding:"required"`
 	Note       string    `form:"note"`
@@ -71,7 +71,7 @@ type UserUpdateReq struct {
 	City       []string  `form:"city" binding:"required"` // 省市区
 	Address    string    `form:"address"`
 	Username   string    `form:"username" binding:"required"`
-	Password   string    `form:"password" binding:"required"`
+	Password   string    `form:"password"`
 	Intro      string    `form:"intro"`
 	Status     int       `form:"status" binding:"required"`
 	Note       string    `form:"note"`

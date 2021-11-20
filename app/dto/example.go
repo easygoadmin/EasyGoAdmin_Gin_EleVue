@@ -1,7 +1,7 @@
 // +----------------------------------------------------------------------
 // | EasyGoAdmin敏捷开发框架 [ EasyGoAdmin ]
 // +----------------------------------------------------------------------
-// | 版权所有 2019~2021 EasyGoAdmin深圳研发中心
+// | 版权所有 2021 EasyGoAdmin深圳研发中心
 // +----------------------------------------------------------------------
 // | 官方网站: http://www.easygoadmin.vip
 // +----------------------------------------------------------------------
@@ -19,101 +19,55 @@ package dto
 
 // 分页查询
 type ExamplePageReq struct {
+	Name string `form:"name"` // 测试名称
 
-	
-	Name   string `form:"name"`   // 测试名称
-	
+	Status int `form:status` // 状态：1正常 2停用
 
-	
-	Status   int    `form:status`   // 状态：1正常 2停用
-	
+	Type int `form:type` // 类型：1京东 2淘宝 3拼多多 4唯品会
 
-	
-	Type   int    `form:type`   // 类型：1京东 2淘宝 3拼多多 4唯品会
-	
+	IsVip int `form:is_vip` // 是否VIP：1是 2否
 
-	
-	IsVip   int    `form:is_vip`   // 是否VIP：1是 2否
-	
-
-	Page  int    `form:"page"`  // 页码
-	Limit int    `form:"limit"` // 每页数
+	Page  int `form:"page"`  // 页码
+	Limit int `form:"limit"` // 每页数
 }
 
 // 添加演示一
 type ExampleAddReq struct {
+	Name string `form:"name"        binding:"required"` // 测试名称
 
-	
-	Name  string `form:"name"        binding:"required"`   // 测试名称
-	
+	Avatar string `form:"avatar"      binding:"required"` // 头像
 
-	
-	Avatar  string `form:"avatar"      binding:"required"`    // 头像
-	
+	Content string `form:"content"        binding:"required"` // 内容
 
-	
-	Content  string `form:"content"        binding:"required"`   // 内容
-	
+	Status int `form:"status"        binding:"required"` // 状态：1正常 2停用
 
-	
-	Status  int    `form:"status"        binding:"required"`    // 状态：1正常 2停用
-	
+	Type int `form:"type"        binding:"required"` // 类型：1京东 2淘宝 3拼多多 4唯品会
 
-	
-	Type  int    `form:"type"        binding:"required"`    // 类型：1京东 2淘宝 3拼多多 4唯品会
-	
+	IsVip int `form:"is_vip"        binding:"required"` // 是否VIP：1是 2否
 
-	
-	IsVip  int    `form:"is_vip"        binding:"required"`    // 是否VIP：1是 2否
-	
-
-	
-	Sort  int `form:"sort"        binding:"required"`   // 排序号
-	
+	Sort int `form:"sort"        binding:"required"` // 排序号
 
 }
 
 // 编辑演示一
 type ExampleUpdateReq struct {
-	Id     int    `form:"id" binding:"required"`
+	Id int `form:"id" binding:"required"`
 
-	
-	Name  string `form:"name"        binding:"required"`   // 测试名称
-	
+	Name string `form:"name"        binding:"required"` // 测试名称
 
-	
-	Avatar  string `form:"avatar"      binding:"required"`    // 头像
-	
+	Avatar string `form:"avatar"      binding:"required"` // 头像
 
-	
-	Content  string `form:"content"        binding:"required"`   // 内容
-	
+	Content string `form:"content"        binding:"required"` // 内容
 
-	
-	Status  int    `form:"status"        binding:"required"`    // 状态：1正常 2停用
-	
+	Status int `form:"status"        binding:"required"` // 状态：1正常 2停用
 
-	
-	Type  int    `form:"type"        binding:"required"`    // 类型：1京东 2淘宝 3拼多多 4唯品会
-	
+	Type int `form:"type"        binding:"required"` // 类型：1京东 2淘宝 3拼多多 4唯品会
 
-	
-	IsVip  int    `form:"is_vip"        binding:"required"`    // 是否VIP：1是 2否
-	
+	IsVip int `form:"is_vip"        binding:"required"` // 是否VIP：1是 2否
 
-	
-	Sort  int `form:"sort"        binding:"required"`   // 排序号
-	
+	Sort int `form:"sort"        binding:"required"` // 排序号
 
 }
-
-
-
-
-
-
-
-
 
 // 设置状态
 type ExampleStatusReq struct {
@@ -121,15 +75,8 @@ type ExampleStatusReq struct {
 	Status int `form:"status"    		binding:"required"`
 }
 
-
-
-
-
 // 设置是否VIP
 type ExampleIsVipReq struct {
-	Id     int `form:"id" 				binding:"required"`
+	Id    int `form:"id" 				binding:"required"`
 	IsVip int `form:"is_vip"    		binding:"required"`
 }
-
-
-

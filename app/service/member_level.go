@@ -64,7 +64,7 @@ func (s *memberLevelService) Add(req *dto.MemberLevelAddReq, userId int) (int64,
 	entity.Name = req.Name
 	entity.Sort = req.Sort
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 插入数据
@@ -83,7 +83,7 @@ func (s *memberLevelService) Update(req *dto.MemberLevelUpdateReq, userId int) (
 	entity.Name = req.Name
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 更新记录
 	return entity.Update()

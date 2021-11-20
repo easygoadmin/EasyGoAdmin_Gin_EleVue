@@ -85,7 +85,7 @@ func (s *noticeService) Add(req *dto.NoticeAddReq, userId int) (int64, error) {
 	entity.Source = req.Source
 	entity.Status = req.Status
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 插入数据
@@ -107,7 +107,7 @@ func (s *noticeService) Update(req *dto.NoticeUpdateReq, userId int) (int64, err
 	entity.Source = req.Source
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 更新记录
 	return entity.Update()
@@ -143,6 +143,6 @@ func (s *noticeService) Status(req *dto.NoticeStatusReq, userId int) (int64, err
 	entity.Id = info.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }

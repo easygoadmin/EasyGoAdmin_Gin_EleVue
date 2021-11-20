@@ -77,7 +77,7 @@ func (s *menuService) Add(req *dto.MenuAddReq, userId int) (int64, error) {
 	entity.Note = req.Note
 	entity.Sort = req.Sort
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 	// 插入数据
 	rows, err := entity.Insert()
@@ -109,7 +109,7 @@ func (s *menuService) Update(req *dto.MenuUpdateReq, userId int) (int64, error) 
 	entity.Note = req.Note
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	// 更新数据
 	rows, err := entity.Update()
 	if err != nil || rows == 0 {
@@ -237,9 +237,9 @@ func setPermission(menuType int, checkedList []int, name string, url string, par
 			entity.Target = "_self"
 			entity.Sort = value
 			entity.CreateUser = userId
-			entity.CreateTime = time.Now()
+			entity.CreateTime = time.Now().Unix()
 			entity.UpdateUser = userId
-			entity.UpdateTime = time.Now()
+			entity.UpdateTime = time.Now().Unix()
 			entity.Mark = 1
 
 			// 插入节点

@@ -85,7 +85,7 @@ func (s *cityService) Add(req *dto.CityAddReq, userId int) (int64, error) {
 	entity.Lat = req.Lat
 	entity.Sort = req.Sort
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 插入记录
@@ -111,7 +111,7 @@ func (s *cityService) Update(req *dto.CityUpdateReq, userId int) (int64, error) 
 	entity.Lat = req.Lat
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 更新记录
 	return entity.Update()

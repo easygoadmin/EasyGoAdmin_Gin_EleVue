@@ -67,7 +67,7 @@ func (s *dictDataService) Add(req *dto.DictDataAddReq, userId int) (int64, error
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 插入记录
@@ -88,7 +88,7 @@ func (s *dictDataService) Update(req *dto.DictDataUpdateReq, userId int) (int64,
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 更新记录
 	return entity.Update()

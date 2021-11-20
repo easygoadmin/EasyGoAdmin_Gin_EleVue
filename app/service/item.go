@@ -94,7 +94,7 @@ func (s *itemService) Add(req *dto.ItemAddReq, userId int) (int64, error) {
 	entity.Note = req.Note
 	entity.Sort = req.Status
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 图片处理
@@ -131,7 +131,7 @@ func (s *itemService) Update(req *dto.ItemUpdateReq, userId int) (int64, error) 
 	}
 	entity.Image = image
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 更新记录
 	return entity.Update()
@@ -167,6 +167,6 @@ func (s *itemService) Status(req *dto.ItemStatusReq, userId int) (int64, error) 
 	entity.Id = info.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }

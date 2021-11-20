@@ -112,7 +112,7 @@ func (s *linkService) Add(req *dto.LinkAddReq, userId int) (int64, error) {
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 图片处理
@@ -155,7 +155,7 @@ func (s *linkService) Update(req *dto.LinkUpdateReq, userId int) (int64, error) 
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 图片处理
 	if req.Image != "" {
@@ -200,6 +200,6 @@ func (s *linkService) Status(req *dto.LinkStatusReq, userId int) (int64, error) 
 	entity.Id = info.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }

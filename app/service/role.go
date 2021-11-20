@@ -67,7 +67,7 @@ func (s *roleService) Add(req *dto.RoleAddReq, userId int) (int64, error) {
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 	// 插入数据
 	rows, err := entity.Insert()
@@ -91,7 +91,7 @@ func (s *roleService) Update(req *dto.RoleUpdateReq, userId int) (int64, error) 
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	// 更新数据
 	rows, err := entity.Update()
 	if err != nil || rows == 0 {
@@ -129,6 +129,6 @@ func (s *roleService) Status(req *dto.RoleStatusReq, userId int) (int64, error) 
 	entity.Id = req.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }

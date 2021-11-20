@@ -141,7 +141,7 @@ func (s *userService) Add(req *dto.UserAddReq, userId int) (int64, error) {
 	entity.Avatar = req.Avatar
 	entity.Mobile = req.Mobile
 	entity.Email = req.Email
-	entity.Birthday = req.Birthday
+	entity.Birthday = req.Birthday.Unix()
 	entity.DeptId = req.DeptId
 	entity.LevelId = req.LevelId
 	entity.PositionId = req.PositionId
@@ -174,7 +174,7 @@ func (s *userService) Add(req *dto.UserAddReq, userId int) (int64, error) {
 		entity.Avatar = avatar
 	}
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 	// 插入记录
 	return entity.Insert()
@@ -192,7 +192,7 @@ func (s *userService) Update(req *dto.UserUpdateReq, userId int) (int64, error) 
 	entity.Avatar = req.Avatar
 	entity.Mobile = req.Mobile
 	entity.Email = req.Email
-	entity.Birthday = req.Birthday
+	entity.Birthday = req.Birthday.Unix()
 	entity.DeptId = req.DeptId
 	entity.LevelId = req.LevelId
 	entity.PositionId = req.PositionId
@@ -225,7 +225,7 @@ func (s *userService) Update(req *dto.UserUpdateReq, userId int) (int64, error) 
 		entity.Avatar = avatar
 	}
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 	// 更新记录
 	return entity.Update()
@@ -260,7 +260,7 @@ func (s *userService) Status(req *dto.UserStatusReq, userId int) (int64, error) 
 	entity.Id = info.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }
 
@@ -287,7 +287,7 @@ func (s *userService) ResetPwd(id int, userId int) (int64, error) {
 	rows, err := utils.XormDb.Id(id).Update(&model.User{
 		Password:   password,
 		UpdateUser: userId,
-		UpdateTime: time.Now(),
+		UpdateTime: time.Now().Unix(),
 	})
 	if err != nil {
 		return 0, err
@@ -331,7 +331,7 @@ func (s *userService) UpdateUserInfo(req *dto.UserInfoReq, userId int) (int64, e
 		Address:    req.Address,
 		Intro:      req.Intro,
 		UpdateUser: userId,
-		UpdateTime: time.Now(),
+		UpdateTime: time.Now().Unix(),
 	})
 	if err != nil {
 		return 0, err
@@ -371,7 +371,7 @@ func (s *userService) UpdatePwd(req *dto.UpdatePwd, userId int) (int64, error) {
 	rows, err := utils.XormDb.Id(userId).Update(&model.User{
 		Password:   newPwd,
 		UpdateUser: userId,
-		UpdateTime: time.Now(),
+		UpdateTime: time.Now().Unix(),
 	})
 	if err != nil {
 		return 0, err

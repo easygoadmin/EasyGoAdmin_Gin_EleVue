@@ -110,6 +110,11 @@ func (s *generateService) Generate(ctx *gin.Context) error {
 		return err
 	}
 
+	// 生成Vo
+	if err := GenerateInfoVo(columnList, authorName, moduleName, moduleTitle); err != nil {
+		return err
+	}
+
 	// 生成服务类
 	if err := GenerateService(columnList, authorName, moduleName, moduleTitle); err != nil {
 		return err
@@ -248,6 +253,64 @@ func GenerateDto(dataList *common.ArrayList, authorName string, moduleName strin
 		}
 		// 文件路径
 		fileName := strings.Join([]string{curDir, "/app/dto/", moduleName, ".go"}, "")
+		// 删除现有文件
+		if err := gfile.Remove(fileName); err != nil {
+			return err
+		}
+		// 写入文件
+		if !gfile.Exists(fileName) {
+			f, err := gfile.Create(fileName)
+			if err == nil {
+				// 写入文件
+				f.WriteString(tmp)
+			}
+			// 关闭
+			f.Close()
+		}
+	}
+	return nil
+}
+
+// 生成Vo
+func GenerateInfoVo(dataList *common.ArrayList, authorName string, moduleName string, moduleTitle string) error {
+	// 初始化表单数组
+	columnList := make([]map[string]interface{}, 0)
+	for i := 0; i < dataList.Size(); i++ {
+		// 当前元素
+		data := dataList.Get(i)
+		// 类型转换
+		item := data.(map[string]interface{})
+		// 字段列名
+		columnName := gconv.String(item["columnName"])
+		// 移除部分非表单字段
+		if columnName == "id" ||
+			columnName == "create_user" ||
+			columnName == "create_time" ||
+			columnName == "update_user" ||
+			columnName == "update_time" ||
+			columnName == "mark" {
+			continue
+		}
+		// 加入数组
+		columnList = append(columnList, item)
+	}
+
+	// 加载自定义模板绑定数据并写入文件
+	if tmp, err := LoadTemplate("vo.html", gin.H{
+		"author":      authorName,
+		"since":       time.Now().Format("2006-01-02"),
+		"moduleName":  moduleName,
+		"entityName":  gstr.UcWords(moduleName),
+		"moduleTitle": moduleTitle,
+		"columnList":  columnList,
+	}, false); err == nil {
+		// 获取项目根目录
+		curDir, err := os.Getwd()
+		if err != nil {
+			return err
+		}
+		// 文件路径
+		fileName := strings.Join([]string{curDir, "/app/vo/", moduleName, ".go"}, "")
 		// 删除现有文件
 		if err := gfile.Remove(fileName); err != nil {
 			return err
@@ -520,9 +583,9 @@ func GeneratePermission(modelName string, modelTitle string, userId int) error {
 	entity.Target = "_self"
 	entity.Sort = 10
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	entity.Mark = 1
 	// 记录ID
 	menuId := 0
@@ -563,7 +626,7 @@ func GeneratePermission(modelName string, modelTitle string, userId int) error {
 		item.Target = "_self"
 		item.Sort = v
 		item.CreateUser = userId
-		item.CreateTime = time.Now()
+		item.CreateTime = time.Now().Unix()
 		item.Mark = 1
 
 		// 权限节点

@@ -16,10 +16,10 @@
 // +----------------------------------------------------------------------
 
 /**
- * 演示一管理-控制器
+ * 演示二管理-控制器
  * @author 半城风雨
  * @since 2021-11-19
- * @File : example
+ * @File : example2
  */
 package controller
 
@@ -32,13 +32,13 @@ import (
 	"net/http"
 )
 
-var Example = new(exampleCtl)
+var Example2 = new(example2Ctl)
 
-type exampleCtl struct{}
+type example2Ctl struct{}
 
-func (c *exampleCtl) List(ctx *gin.Context) {
+func (c *example2Ctl) List(ctx *gin.Context) {
 	// 参数绑定
-	var req *dto.ExamplePageReq
+	var req *dto.Example2PageReq
 	if err := ctx.ShouldBind(&req); err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -48,7 +48,7 @@ func (c *exampleCtl) List(ctx *gin.Context) {
 	}
 
 	// 调用获取列表方法
-	list, count, err := service.Example.GetList(req)
+	list, count, err := service.Example2.GetList(req)
 	if err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -66,9 +66,9 @@ func (c *exampleCtl) List(ctx *gin.Context) {
 	})
 }
 
-func (c *exampleCtl) Add(ctx *gin.Context) {
+func (c *example2Ctl) Add(ctx *gin.Context) {
 	// 参数绑定
-	var req *dto.ExampleAddReq
+	var req *dto.Example2AddReq
 	if err := ctx.ShouldBind(&req); err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -78,7 +78,7 @@ func (c *exampleCtl) Add(ctx *gin.Context) {
 	}
 
 	// 调用添加方法
-	rows, err := service.Example.Add(req, utils.Uid(ctx))
+	rows, err := service.Example2.Add(req, utils.Uid(ctx))
 	if err != nil || rows == 0 {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -94,9 +94,9 @@ func (c *exampleCtl) Add(ctx *gin.Context) {
 	})
 }
 
-func (c *exampleCtl) Update(ctx *gin.Context) {
+func (c *example2Ctl) Update(ctx *gin.Context) {
 	// 参数绑定
-	var req *dto.ExampleUpdateReq
+	var req *dto.Example2UpdateReq
 	if err := ctx.ShouldBind(&req); err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -106,7 +106,7 @@ func (c *exampleCtl) Update(ctx *gin.Context) {
 	}
 
 	// 调用更新方法
-	rows, err := service.Example.Update(req, utils.Uid(ctx))
+	rows, err := service.Example2.Update(req, utils.Uid(ctx))
 	if err != nil || rows == 0 {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -122,7 +122,7 @@ func (c *exampleCtl) Update(ctx *gin.Context) {
 	})
 }
 
-func (c *exampleCtl) Delete(ctx *gin.Context) {
+func (c *example2Ctl) Delete(ctx *gin.Context) {
 	// 记录ID
 	ids := ctx.Param("ids")
 	if ids == "" {
@@ -134,7 +134,7 @@ func (c *exampleCtl) Delete(ctx *gin.Context) {
 	}
 
 	// 调用删除方法
-	rows, err := service.Example.Delete(ids)
+	rows, err := service.Example2.Delete(ids)
 	if err != nil || rows == 0 {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -150,9 +150,9 @@ func (c *exampleCtl) Delete(ctx *gin.Context) {
 	})
 }
 
-func (c *exampleCtl) Status(ctx *gin.Context) {
+func (c *example2Ctl) Status(ctx *gin.Context) {
 	// 参数绑定
-	var req *dto.ExampleStatusReq
+	var req *dto.Example2StatusReq
 	if err := ctx.ShouldBind(&req); err != nil {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,
@@ -162,34 +162,7 @@ func (c *exampleCtl) Status(ctx *gin.Context) {
 	}
 
 	// 调用设置状态方法
-	rows, err := service.Example.Status(req, utils.Uid(ctx))
-	if err != nil || rows == 0 {
-		ctx.JSON(http.StatusOK, common.JsonResult{
-			Code: -1,
-			Msg:  err.Error(),
-		})
-		return
-	}
-	// 返回结果
-	ctx.JSON(http.StatusOK, common.JsonResult{
-		Code: 0,
-		Msg:  "设置成功",
-	})
-}
-
-func (c *exampleCtl) IsVip(ctx *gin.Context) {
-	// 参数绑定
-	var req *dto.ExampleIsVipReq
-	if err := ctx.ShouldBind(&req); err != nil {
-		ctx.JSON(http.StatusOK, common.JsonResult{
-			Code: -1,
-			Msg:  err.Error(),
-		})
-		return
-	}
-
-	// 调用设置状态方法
-	rows, err := service.Example.IsVip(req, utils.Uid(ctx))
+	rows, err := service.Example2.Status(req, utils.Uid(ctx))
 	if err != nil || rows == 0 {
 		ctx.JSON(http.StatusOK, common.JsonResult{
 			Code: -1,

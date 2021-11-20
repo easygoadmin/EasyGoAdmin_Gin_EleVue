@@ -18,7 +18,7 @@
 /**
  * 演示一管理-服务类
  * @author 半城风雨
- * @since 2021-11-18
+ * @since 2021-11-19
  * @File : example
  */
 package service
@@ -26,6 +26,7 @@ package service
 import (
 	"easygoadmin/app/dto"
 	"easygoadmin/app/model"
+	"easygoadmin/app/vo"
 	"easygoadmin/utils"
 	"easygoadmin/utils/gconv"
 	"errors"
@@ -38,7 +39,7 @@ var Example = new(exampleService)
 
 type exampleService struct{}
 
-func (s *exampleService) GetList(req *dto.ExamplePageReq) ([]model.Example, int64, error) {
+func (s *exampleService) GetList(req *dto.ExamplePageReq) ([]vo.ExampleInfoVo, int64, error) {
 	// 初始化查询实例
 	query := utils.XormDb.Where("mark=1")
 	if req != nil {
@@ -55,14 +56,29 @@ func (s *exampleService) GetList(req *dto.ExamplePageReq) ([]model.Example, int6
 	// 查询列表
 	list := make([]model.Example, 0)
 	count, err := query.FindAndCount(&list)
+
+	// 数据处理
+	var result []vo.ExampleInfoVo
+	for _, v := range list {
+		item := vo.ExampleInfoVo{}
+		item.Example = v
+
+		// 头像
+		if v.Avatar != "" {
+			item.Avatar = utils.GetImageUrl(v.Avatar)
+		}
+
+		result = append(result, item)
+	}
+
 	// 返回结果
-	return list, count, err
+	return result, count, err
 }
 
 func (s *exampleService) Add(req *dto.ExampleAddReq, userId int) (int64, error) {
 	// 实例化对象
 	var entity model.Example
-	
+
 	entity.Name = req.Name
 	// 头像处理
 	if req.Avatar != "" {
@@ -78,7 +94,7 @@ func (s *exampleService) Add(req *dto.ExampleAddReq, userId int) (int64, error) 
 	entity.IsVip = req.IsVip
 	entity.Sort = req.Sort
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 	// 插入数据
 	return entity.Insert()
@@ -91,7 +107,7 @@ func (s *exampleService) Update(req *dto.ExampleUpdateReq, userId int) (int64, e
 	if err != nil || !has {
 		return 0, errors.New("记录不存在")
 	}
-	
+
 	entity.Name = req.Name
 	// 头像处理
 	if req.Avatar != "" {
@@ -107,7 +123,7 @@ func (s *exampleService) Update(req *dto.ExampleUpdateReq, userId int) (int64, e
 	entity.IsVip = req.IsVip
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	// 更新记录
 	return entity.Update()
 }
@@ -130,14 +146,6 @@ func (s *exampleService) Delete(ids string) (int64, error) {
 	}
 }
 
-
-
-
-
-
-
-
-
 func (s *exampleService) Status(req *dto.ExampleStatusReq, userId int) (int64, error) {
 	// 查询记录是否存在
 	info := &model.Example{Id: req.Id}
@@ -151,13 +159,9 @@ func (s *exampleService) Status(req *dto.ExampleStatusReq, userId int) (int64, e
 	entity.Id = info.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }
-
-
-
-
 
 func (s *exampleService) IsVip(req *dto.ExampleIsVipReq, userId int) (int64, error) {
 	// 查询记录是否存在
@@ -172,10 +176,6 @@ func (s *exampleService) IsVip(req *dto.ExampleIsVipReq, userId int) (int64, err
 	entity.Id = info.Id
 	entity.IsVip = req.IsVip
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }
-
-
-
-

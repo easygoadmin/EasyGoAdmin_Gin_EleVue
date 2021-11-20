@@ -100,12 +100,12 @@ func (s *adService) Add(req *dto.AdAddReq, userId int) (int64, error) {
 	entity.Url = req.Url
 	entity.Width = req.Width
 	entity.Height = req.Height
-	entity.StartTime = req.StartTime
-	entity.EndTime = req.EndTime
+	entity.StartTime = req.StartTime.Unix()
+	entity.EndTime = req.EndTime.Unix()
 	entity.Status = req.Status
 	entity.Sort = req.Sort
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 广告封面
@@ -141,12 +141,12 @@ func (s *adService) Update(req *dto.AdUpdateReq, userId int) (int64, error) {
 	entity.Url = req.Url
 	entity.Width = req.Width
 	entity.Height = req.Height
-	entity.StartTime = req.StartTime
-	entity.EndTime = req.EndTime
+	entity.StartTime = req.StartTime.Unix()
+	entity.EndTime = req.EndTime.Unix()
 	entity.Status = req.Status
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 广告封面
 	if req.Type == 1 {
@@ -194,6 +194,6 @@ func (s *adService) Status(req *dto.AdStatusReq, userId int) (int64, error) {
 	entity.Id = info.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }

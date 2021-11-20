@@ -79,8 +79,8 @@ func init() {
 	// 登录注册
 	login := router.Group("/")
 	{
-		login.GET("/captcha", controller.Login.Captcha)
 		login.GET("/", controller.Login.Login)
+		login.GET("/captcha", controller.Login.Captcha)
 		login.POST("/login", controller.Login.Login)
 		login.Any("/updateUserInfo", controller.Index.UpdateUserInfo)
 		login.Any("/updatePwd", controller.Index.UpdatePwd)
@@ -332,6 +332,17 @@ func init() {
 
 		example.PUT("/status", controller.Example.Status)
 		example.PUT("/isVip", controller.Example.IsVip)
+	}
+
+	/* 演示二 */
+	example2 := router.Group("example2")
+	{
+		example2.GET("/list", controller.Example2.List)
+		example2.POST("/add", controller.Example2.Add)
+		example2.PUT("/update", controller.Example2.Update)
+		example2.DELETE("/delete/:ids", controller.Example2.Delete)
+
+		example2.PUT("/status", controller.Example2.Status)
 	}
 
 	// 启动

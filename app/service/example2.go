@@ -16,16 +16,17 @@
 // +----------------------------------------------------------------------
 
 /**
- * 职级-服务类
+ * 演示二管理-服务类
  * @author 半城风雨
- * @since 2021/8/20
- * @File : level
+ * @since 2021-11-19
+ * @File : example2
  */
 package service
 
 import (
 	"easygoadmin/app/dto"
 	"easygoadmin/app/model"
+	"easygoadmin/app/vo"
 	"easygoadmin/utils"
 	"easygoadmin/utils/gconv"
 	"errors"
@@ -34,11 +35,11 @@ import (
 )
 
 // 中间件管理服务
-var Level = new(levelService)
+var Example2 = new(example2Service)
 
-type levelService struct{}
+type example2Service struct{}
 
-func (s *levelService) GetList(req *dto.LevelPageReq) ([]model.Level, int64, error) {
+func (s *example2Service) GetList(req *dto.Example2PageReq) ([]vo.Example2InfoVo, int64, error) {
 	// 初始化查询实例
 	query := utils.XormDb.Where("mark=1")
 	if req != nil {
@@ -53,15 +54,26 @@ func (s *levelService) GetList(req *dto.LevelPageReq) ([]model.Level, int64, err
 	offset := (req.Page - 1) * req.Limit
 	query = query.Limit(req.Limit, offset)
 	// 查询列表
-	list := make([]model.Level, 0)
+	list := make([]model.Example2, 0)
 	count, err := query.FindAndCount(&list)
+
+	// 数据处理
+	var result []vo.Example2InfoVo
+	for _, v := range list {
+		item := vo.Example2InfoVo{}
+		item.Example2 = v
+
+		result = append(result, item)
+	}
+
 	// 返回结果
-	return list, count, err
+	return result, count, err
 }
 
-func (s *levelService) Add(req *dto.LevelAddReq, userId int) (int64, error) {
+func (s *example2Service) Add(req *dto.Example2AddReq, userId int) (int64, error) {
 	// 实例化对象
-	var entity model.Level
+	var entity model.Example2
+
 	entity.Name = req.Name
 	entity.Status = req.Status
 	entity.Sort = req.Sort
@@ -72,13 +84,14 @@ func (s *levelService) Add(req *dto.LevelAddReq, userId int) (int64, error) {
 	return entity.Insert()
 }
 
-func (s *levelService) Update(req *dto.LevelUpdateReq, userId int) (int64, error) {
+func (s *example2Service) Update(req *dto.Example2UpdateReq, userId int) (int64, error) {
 	// 查询记录
-	entity := &model.Level{Id: req.Id}
+	entity := &model.Example2{Id: req.Id}
 	has, err := entity.Get()
 	if err != nil || !has {
 		return 0, errors.New("记录不存在")
 	}
+
 	entity.Name = req.Name
 	entity.Status = req.Status
 	entity.Sort = req.Sort
@@ -89,12 +102,12 @@ func (s *levelService) Update(req *dto.LevelUpdateReq, userId int) (int64, error
 }
 
 // 删除
-func (s *levelService) Delete(ids string) (int64, error) {
+func (s *example2Service) Delete(ids string) (int64, error) {
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
 		// 单个删除
-		entity := &model.Level{Id: gconv.Int(ids)}
+		entity := &model.Example2{Id: gconv.Int(ids)}
 		rows, err := entity.Delete()
 		if err != nil || rows == 0 {
 			return 0, errors.New("删除失败")
@@ -106,16 +119,16 @@ func (s *levelService) Delete(ids string) (int64, error) {
 	}
 }
 
-func (s *levelService) Status(req *dto.LevelStatusReq, userId int) (int64, error) {
+func (s *example2Service) Status(req *dto.Example2StatusReq, userId int) (int64, error) {
 	// 查询记录是否存在
-	info := &model.Level{Id: req.Id}
+	info := &model.Example2{Id: req.Id}
 	has, err := info.Get()
 	if err != nil || !has {
 		return 0, errors.New("记录不存在")
 	}
 
 	// 设置状态
-	entity := &model.Level{}
+	entity := &model.Example2{}
 	entity.Id = info.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId

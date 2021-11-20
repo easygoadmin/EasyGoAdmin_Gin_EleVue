@@ -69,7 +69,7 @@ func (s *deptService) Add(req *dto.DeptAddReq, userId int) (int64, error) {
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 	// 插入记录
 	rows, err := entity.Insert()
@@ -95,7 +95,7 @@ func (s *deptService) Update(req *dto.DeptUpdateReq, userId int) (int64, error) 
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	// 更新记录
 	rows, err := entity.Update()
 	if err != nil || rows == 0 {

@@ -102,7 +102,7 @@ func (s *adSortService) Add(req *dto.AdSortAddReq, userId int) (int64, error) {
 	entity.Platform = req.Platform
 	entity.Sort = req.Sort
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 插入数据
@@ -125,7 +125,7 @@ func (s *adSortService) Update(req *dto.AdSortUpdateReq, userId int) (int64, err
 	entity.Platform = req.Platform
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 更新记录
 	return entity.Update()

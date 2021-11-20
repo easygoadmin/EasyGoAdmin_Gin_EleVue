@@ -1,7 +1,7 @@
 // +----------------------------------------------------------------------
 // | EasyGoAdmin敏捷开发框架 [ EasyGoAdmin ]
 // +----------------------------------------------------------------------
-// | 版权所有 2019~2021 EasyGoAdmin深圳研发中心
+// | 版权所有 2021 EasyGoAdmin深圳研发中心
 // +----------------------------------------------------------------------
 // | 官方网站: http://www.easygoadmin.vip
 // +----------------------------------------------------------------------
@@ -16,55 +16,20 @@
 // +----------------------------------------------------------------------
 
 /**
- * 登录-服务类
+ * 演示一Vo
  * @author 半城风雨
- * @since 2021/9/7
- * @File : login
+ * @since 2021-11-19
+ * @File : example
  */
-package service
+package vo
 
-import (
-	"easygoadmin/app/model"
-	"easygoadmin/utils"
-	"errors"
-	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/go-xorm/xorm"
-	"time"
-)
+import "easygoadmin/app/model"
 
-var x *xorm.Engine
+// 演示一信息Vo
+type ExampleInfoVo struct {
+	model.Example
 
-// 中间件管理服务
-var Login = new(loginService)
-
-type loginService struct{}
-
-// 系统登录
-func (s *loginService) UserLogin(username, password string, ctx *gin.Context) (string, error) {
-	// 查询用户
-	var user model.User
-	isOk, err := utils.XormDb.Where("username=? and mark=1", username).Get(&user)
-	if err != nil && isOk {
-		return "", errors.New("用户名或者密码不正确")
-	}
-	// 密码校验
-	pwd, _ := utils.Md5(password + user.Username)
-	if user.Password != pwd {
-		return "", errors.New("密码不正确")
-	}
-	// 判断当前用户状态
-	if user.Status != 1 {
-		return "", errors.New("您的账号已被禁用,请联系管理员")
-	}
-
-	// 更新登录时间、登录IP
-	utils.XormDb.Id(user.Id).Update(&model.User{LoginTime: time.Now().Unix(), LoginIp: utils.GetClientIp(ctx), UpdateTime: time.Now().Unix()})
-
-	// 生成Token
-	token, _ := utils.GenerateToken(user.Id, user.Username, user.Password)
-	fmt.Println("生成的token:", token)
-
-	// 返回token
-	return token, nil
+	StatusName int `json:"statusName"` // 状态名称
+	TypeName   int `json:"typeName"`   // 类型名称
+	IsVipName  int `json:"isVipName"`  // 是否VIP名称
 }

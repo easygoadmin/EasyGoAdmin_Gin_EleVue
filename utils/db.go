@@ -28,6 +28,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
+	"time"
 	"xorm.io/core"
 )
 
@@ -55,6 +56,13 @@ func init() {
 		fmt.Printf("数据库连接错误:%v", err.Error())
 		return
 	}
+
+	XormDb.DatabaseTZ = time.Local // 必须
+	XormDb.TZLocation = time.Local // 必须
+	// 设置连接池的空闲数大小
+	XormDb.SetMaxIdleConns(10)
+	// 设置最大打开连接数
+	XormDb.SetMaxOpenConns(30)
 
 	// 结构体与数据表的映射
 	tbMapper := core.NewPrefixMapper(core.SnakeMapper{}, "sys_")

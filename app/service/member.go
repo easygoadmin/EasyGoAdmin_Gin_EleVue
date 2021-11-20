@@ -113,7 +113,7 @@ func (s *memberService) Add(req *dto.MemberAddReq, userId int) (int64, error) {
 	entity.Realname = req.Realname
 	entity.Nickname = req.Nickname
 	entity.Gender = req.Gender
-	entity.Birthday = req.Birthday
+	entity.Birthday = req.Birthday.Unix()
 	entity.Address = req.Address
 	entity.Intro = req.Intro
 	entity.Signature = req.Signature
@@ -121,7 +121,7 @@ func (s *memberService) Add(req *dto.MemberAddReq, userId int) (int64, error) {
 	entity.Source = req.Source
 	entity.Status = req.Status
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 头像处理
@@ -162,7 +162,7 @@ func (s *memberService) Update(req *dto.MemberUpdateReq, userId int) (int64, err
 	entity.Realname = req.Realname
 	entity.Nickname = req.Nickname
 	entity.Gender = req.Gender
-	entity.Birthday = req.Birthday
+	entity.Birthday = req.Birthday.Unix()
 	entity.Address = req.Address
 	entity.Intro = req.Intro
 	entity.Signature = req.Signature
@@ -170,7 +170,7 @@ func (s *memberService) Update(req *dto.MemberUpdateReq, userId int) (int64, err
 	entity.Source = req.Source
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 头像处理
 	if req.Avatar != "" {
@@ -228,6 +228,6 @@ func (s *memberService) Status(req *dto.MemberStatusReq, userId int) (int64, err
 	entity.Id = info.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }

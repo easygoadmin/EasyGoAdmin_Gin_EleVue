@@ -87,7 +87,7 @@ func (s *configDataService) Add(req *dto.ConfigDataAddReq, userId int) (int64, e
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 插入数据
@@ -112,7 +112,7 @@ func (s *configDataService) Update(req *dto.ConfigDataUpdateReq, userId int) (in
 	entity.Sort = req.Sort
 	entity.Note = req.Note
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 更新记录
 	return entity.Update()
@@ -148,6 +148,6 @@ func (s *configDataService) Status(req *dto.ConfigDataStatusReq, userId int) (in
 	entity.Id = info.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }

@@ -101,7 +101,7 @@ func (s *itemCateService) Add(req *dto.ItemCateAddReq, userId int) (int64, error
 		entity.Cover = ""
 	}
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 
 	// 插入数据
@@ -140,7 +140,7 @@ func (s *itemCateService) Update(req *dto.ItemCateUpdateReq, userId int) (int64,
 		entity.Cover = ""
 	}
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 
 	// 更新记录
 	return entity.Update()

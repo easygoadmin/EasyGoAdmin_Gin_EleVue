@@ -65,7 +65,7 @@ func (s *positionService) Add(req *dto.PositionAddReq, userId int) (int64, error
 	entity.Status = req.Status
 	entity.Sort = req.Sort
 	entity.CreateUser = userId
-	entity.CreateTime = time.Now()
+	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 	// 插入数据
 	return entity.Insert()
@@ -82,7 +82,7 @@ func (s *positionService) Update(req *dto.PositionUpdateReq, userId int) (int64,
 	entity.Status = req.Status
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	// 更新数据
 	return entity.Update()
 }
@@ -117,7 +117,7 @@ func (s *positionService) Status(req *dto.PositionStatusReq, userId int) (int64,
 	entity.Id = req.Id
 	entity.Status = req.Status
 	entity.UpdateUser = userId
-	entity.UpdateTime = time.Now()
+	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 
 }
