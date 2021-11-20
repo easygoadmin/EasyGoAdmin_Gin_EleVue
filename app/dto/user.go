@@ -51,6 +51,7 @@ type UserAddReq struct {
 	Status     int      `form:"status" binding:"required"`
 	Note       string   `form:"note"`
 	Sort       int      `form:"sort" binding:"required"`
+	RoleIds    []int    `form:"roleIds"` // 用户角色
 }
 
 // 更新用户
@@ -74,6 +75,7 @@ type UserUpdateReq struct {
 	Status     int      `form:"status" binding:"required"`
 	Note       string   `form:"note"`
 	Sort       int      `form:"sort" binding:"required"`
+	RoleIds    []int    `form:"roleIds"` // 用户角色
 }
 
 // 设置状态

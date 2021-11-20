@@ -228,7 +228,25 @@ func (s *userService) Update(req *dto.UserUpdateReq, userId int) (int64, error) 
 	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
 	// 更新记录
-	return entity.Update()
+	rows, err := entity.Update()
+	if err != nil || rows == 0 {
+		return 0, err
+	}
+
+	// 删除用户角色关系
+	utils.XormDb.Where("user_id=?", entity.Id).Delete(&model.UserRole{})
+	// 创建人员角色关系
+	for _, v := range req.RoleIds {
+		if v <= 0 {
+			continue
+		}
+		var userRole model.UserRole
+		userRole.UserId = entity.Id
+		userRole.RoleId = gconv.Int(v)
+		userRole.Insert()
+	}
+
+	return rows, nil
 }
 
 func (s *userService) Delete(ids string) (int64, error) {

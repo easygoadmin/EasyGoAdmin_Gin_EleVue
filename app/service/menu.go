@@ -255,25 +255,23 @@ func (s *menuService) GetPermissionList(userId int) interface{} {
 		menuList, _ := Menu.GetTreeList()
 		return menuList
 	} else {
-		//// 非管理员
-		//// 创建查询实例
-		//query := dao.Menu.As("m").Clone()
-		//// 内联查询
-		//query = query.InnerJoin("sys_role_menu as r", "m.id = r.menu_id")
-		//query = query.InnerJoin("sys_user_role ur", "ur.role_id=r.role_id")
-		//query = query.Where("ur.user_id=? AND m.type=0 AND m.`status`=1 AND m.mark=1", userId)
-		//// 获取字段
-		//query.Fields("m.*")
-		//// 排序
-		//query = query.Order("m.id asc")
-		//// 数据转换
-		//var list []*model.Menu
-		//query.Structs(&list)
-		//// 数据处理
-		//var menuNode model.TreeNode
-		//makeTree(list, &menuNode)
-		//return menuNode.Children
-		return nil
+		// 非管理员
+
+		// 数据转换
+		list := make([]model.Menu, 0)
+		// 查询数据
+		utils.XormDb.Table("sys_menu").Alias("m").
+			Join("INNER", []string{"sys_role_menu", "r"}, "m.id = r.menu_id").
+			Join("INNER", []string{"sys_user_role", "ur"}, "ur.role_id=r.role_id").
+			Where("ur.user_id=? AND m.type=0 AND m.`status`=1 AND m.mark=1", userId).
+			Cols("m.*").
+			OrderBy("m.id asc").
+			Find(&list)
+
+		// 数据处理
+		var menuNode vo.MenuTreeNode
+		makeTree(list, &menuNode)
+		return menuNode.Children
 	}
 }
 
