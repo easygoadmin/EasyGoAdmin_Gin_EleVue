@@ -51,6 +51,9 @@ type FileInfo struct {
 }
 
 func (s *uploadService) UploadImage(ctx *gin.Context) (FileInfo, error) {
+	if utils.AppDebug() {
+		return FileInfo{}, errors.New("演示环境，暂无权限操作")
+	}
 	// 获取文件(注意这个地方的file要和html模板中的name一致)
 	file, err := ctx.FormFile("file")
 	if err != nil {

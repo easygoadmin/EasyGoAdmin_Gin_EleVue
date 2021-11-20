@@ -60,6 +60,9 @@ func (s *levelService) GetList(req *dto.LevelPageReq) ([]model.Level, int64, err
 }
 
 func (s *levelService) Add(req *dto.LevelAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.Level
 	entity.Name = req.Name
@@ -73,6 +76,9 @@ func (s *levelService) Add(req *dto.LevelAddReq, userId int) (int64, error) {
 }
 
 func (s *levelService) Update(req *dto.LevelUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.Level{Id: req.Id}
 	has, err := entity.Get()
@@ -90,6 +96,9 @@ func (s *levelService) Update(req *dto.LevelUpdateReq, userId int) (int64, error
 
 // 删除
 func (s *levelService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -107,6 +116,9 @@ func (s *levelService) Delete(ids string) (int64, error) {
 }
 
 func (s *levelService) Status(req *dto.LevelStatusReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录是否存在
 	info := &model.Level{Id: req.Id}
 	has, err := info.Get()

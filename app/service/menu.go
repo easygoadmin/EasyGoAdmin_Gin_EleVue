@@ -62,6 +62,9 @@ func (s *menuService) GetList(req *dto.MenuQueryReq) ([]model.Menu, error) {
 }
 
 func (s *menuService) Add(req *dto.MenuAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.Menu
 	entity.ParentId = req.ParentId
@@ -90,6 +93,9 @@ func (s *menuService) Add(req *dto.MenuAddReq, userId int) (int64, error) {
 }
 
 func (s *menuService) Update(req *dto.MenuUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.Menu{Id: req.Id}
 	has, err := entity.Get()
@@ -123,6 +129,9 @@ func (s *menuService) Update(req *dto.MenuUpdateReq, userId int) (int64, error) 
 }
 
 func (s *menuService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {

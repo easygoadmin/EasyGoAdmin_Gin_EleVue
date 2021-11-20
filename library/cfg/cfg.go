@@ -39,7 +39,7 @@ func Instance() *config {
 	once.Do(func() {
 		var conf config
 		path, _ := os.Getwd()
-		filePath := path + "\\config\\config.toml"
+		filePath := path + "/config/config.toml"
 		if _, err := toml.DecodeFile(filePath, &conf); err != nil {
 			return
 		}

@@ -76,6 +76,9 @@ func (s *configDataService) GetList(req *dto.ConfigDataPageReq) ([]vo.ConfigData
 }
 
 func (s *configDataService) Add(req *dto.ConfigDataAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.ConfigData
 	entity.Title = req.Title
@@ -95,6 +98,9 @@ func (s *configDataService) Add(req *dto.ConfigDataAddReq, userId int) (int64, e
 }
 
 func (s *configDataService) Update(req *dto.ConfigDataUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.ConfigData{Id: req.Id}
 	has, err := entity.Get()
@@ -119,6 +125,9 @@ func (s *configDataService) Update(req *dto.ConfigDataUpdateReq, userId int) (in
 }
 
 func (s *configDataService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -136,6 +145,9 @@ func (s *configDataService) Delete(ids string) (int64, error) {
 }
 
 func (s *configDataService) Status(req *dto.ConfigDataStatusReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录是否存在
 	info := &model.ConfigData{Id: req.Id}
 	has, err := info.Get()

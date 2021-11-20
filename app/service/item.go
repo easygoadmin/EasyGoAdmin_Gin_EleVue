@@ -85,6 +85,9 @@ func (s *itemService) GetList(req *dto.ItemPageReq) ([]vo.ItemInfoVo, int64, err
 }
 
 func (s *itemService) Add(req *dto.ItemAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.Item
 	entity.Name = req.Name
@@ -109,6 +112,9 @@ func (s *itemService) Add(req *dto.ItemAddReq, userId int) (int64, error) {
 }
 
 func (s *itemService) Update(req *dto.ItemUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.Item{Id: req.Id}
 	has, err := entity.Get()
@@ -138,6 +144,9 @@ func (s *itemService) Update(req *dto.ItemUpdateReq, userId int) (int64, error) 
 }
 
 func (s *itemService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -155,6 +164,9 @@ func (s *itemService) Delete(ids string) (int64, error) {
 }
 
 func (s *itemService) Status(req *dto.ItemStatusReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录是否存在
 	info := &model.Item{Id: req.Id}
 	has, err := info.Get()

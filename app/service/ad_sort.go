@@ -93,6 +93,9 @@ func (s *adSortService) GetList(req *dto.AdSortPageReq) ([]vo.AdSortInfoVo, int6
 }
 
 func (s *adSortService) Add(req *dto.AdSortAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.AdSort
 	entity.Description = req.Description
@@ -110,6 +113,9 @@ func (s *adSortService) Add(req *dto.AdSortAddReq, userId int) (int64, error) {
 }
 
 func (s *adSortService) Update(req *dto.AdSortUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.AdSort{Id: req.Id}
 	has, err := entity.Get()
@@ -132,6 +138,9 @@ func (s *adSortService) Update(req *dto.AdSortUpdateReq, userId int) (int64, err
 }
 
 func (s *adSortService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {

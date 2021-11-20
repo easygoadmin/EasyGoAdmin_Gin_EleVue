@@ -49,6 +49,9 @@ func (s *configService) GetList() []model.Config {
 }
 
 func (s *configService) Add(req *dto.ConfigAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.Config
 	entity.Name = req.Name
@@ -62,6 +65,9 @@ func (s *configService) Add(req *dto.ConfigAddReq, userId int) (int64, error) {
 }
 
 func (s *configService) Update(req *dto.ConfigUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.Config{Id: req.Id}
 	has, err := entity.Get()
@@ -80,6 +86,9 @@ func (s *configService) Update(req *dto.ConfigUpdateReq, userId int) (int64, err
 }
 
 func (s *configService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {

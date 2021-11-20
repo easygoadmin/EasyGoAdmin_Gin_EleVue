@@ -106,6 +106,9 @@ func (s *memberService) GetList(req *dto.MemberPageReq) ([]vo.MemberInfoVo, int6
 }
 
 func (s *memberService) Add(req *dto.MemberAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.Member
 	entity.Username = req.Username
@@ -151,6 +154,9 @@ func (s *memberService) Add(req *dto.MemberAddReq, userId int) (int64, error) {
 }
 
 func (s *memberService) Update(req *dto.MemberUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.Member{Id: req.Id}
 	has, err := entity.Get()
@@ -199,6 +205,9 @@ func (s *memberService) Update(req *dto.MemberUpdateReq, userId int) (int64, err
 }
 
 func (s *memberService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -216,6 +225,9 @@ func (s *memberService) Delete(ids string) (int64, error) {
 }
 
 func (s *memberService) Status(req *dto.MemberStatusReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录是否存在
 	info := &model.Member{Id: req.Id}
 	has, err := info.Get()

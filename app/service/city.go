@@ -73,6 +73,9 @@ func (s *cityService) GetList(req *dto.CityQueryReq) []vo.CityInfoVo {
 }
 
 func (s *cityService) Add(req *dto.CityAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.City
 	entity.Name = req.Name
@@ -93,6 +96,9 @@ func (s *cityService) Add(req *dto.CityAddReq, userId int) (int64, error) {
 }
 
 func (s *cityService) Update(req *dto.CityUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.City{Id: req.Id}
 	has, err := entity.Get()
@@ -118,6 +124,9 @@ func (s *cityService) Update(req *dto.CityUpdateReq, userId int) (int64, error) 
 }
 
 func (s *cityService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {

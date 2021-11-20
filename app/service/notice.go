@@ -77,6 +77,9 @@ func (s *noticeService) GetList(req *dto.NoticePageReq) ([]vo.NoticeInfoVo, int6
 }
 
 func (s *noticeService) Add(req *dto.NoticeAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.Notice
 	entity.Title = req.Title
@@ -93,6 +96,9 @@ func (s *noticeService) Add(req *dto.NoticeAddReq, userId int) (int64, error) {
 }
 
 func (s *noticeService) Update(req *dto.NoticeUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.Notice{Id: req.Id}
 	has, err := entity.Get()
@@ -114,6 +120,9 @@ func (s *noticeService) Update(req *dto.NoticeUpdateReq, userId int) (int64, err
 }
 
 func (s *noticeService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -131,6 +140,9 @@ func (s *noticeService) Delete(ids string) (int64, error) {
 }
 
 func (s *noticeService) Status(req *dto.NoticeStatusReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录是否存在
 	info := &model.Notice{Id: req.Id}
 	has, err := info.Get()

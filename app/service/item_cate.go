@@ -76,6 +76,9 @@ func (s *itemCateService) GetList(req *dto.ItemCateQueryReq) []vo.ItemCateInfoVo
 }
 
 func (s *itemCateService) Add(req *dto.ItemCateAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.ItemCate
 	entity.Name = req.Name
@@ -109,6 +112,9 @@ func (s *itemCateService) Add(req *dto.ItemCateAddReq, userId int) (int64, error
 }
 
 func (s *itemCateService) Update(req *dto.ItemCateUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.ItemCate{Id: req.Id}
 	has, err := entity.Get()
@@ -147,6 +153,9 @@ func (s *itemCateService) Update(req *dto.ItemCateUpdateReq, userId int) (int64,
 }
 
 func (s *itemCateService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {

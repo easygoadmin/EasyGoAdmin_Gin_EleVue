@@ -59,6 +59,9 @@ func (s *positionService) GetList(req *dto.PositionPageReq) ([]model.Position, i
 }
 
 func (s *positionService) Add(req *dto.PositionAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化模型
 	var entity model.Position
 	entity.Name = req.Name
@@ -72,6 +75,9 @@ func (s *positionService) Add(req *dto.PositionAddReq, userId int) (int64, error
 }
 
 func (s *positionService) Update(req *dto.PositionUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.Position{Id: req.Id}
 	has, err := entity.Get()
@@ -88,6 +94,9 @@ func (s *positionService) Update(req *dto.PositionUpdateReq, userId int) (int64,
 }
 
 func (s *positionService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -105,6 +114,9 @@ func (s *positionService) Delete(ids string) (int64, error) {
 }
 
 func (s *positionService) Status(req *dto.PositionStatusReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	info := &model.Position{Id: req.Id}
 	has, err := info.Get()

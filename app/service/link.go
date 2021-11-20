@@ -99,6 +99,9 @@ func (s *linkService) GetList(req *dto.LinkPageReq) ([]vo.LinkInfoVo, int64, err
 }
 
 func (s *linkService) Add(req *dto.LinkAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.Link
 	entity.Name = req.Name
@@ -129,6 +132,9 @@ func (s *linkService) Add(req *dto.LinkAddReq, userId int) (int64, error) {
 }
 
 func (s *linkService) Update(req *dto.LinkUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.Link{Id: req.Id}
 	has, err := entity.Get()
@@ -171,6 +177,9 @@ func (s *linkService) Update(req *dto.LinkUpdateReq, userId int) (int64, error) 
 }
 
 func (s *linkService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -188,6 +197,9 @@ func (s *linkService) Delete(ids string) (int64, error) {
 }
 
 func (s *linkService) Status(req *dto.LinkStatusReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录是否存在
 	info := &model.Link{Id: req.Id}
 	has, err := info.Get()

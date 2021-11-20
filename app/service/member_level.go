@@ -59,6 +59,9 @@ func (s *memberLevelService) GetList(req *dto.MemberLevelPageReq) ([]model.Membe
 }
 
 func (s *memberLevelService) Add(req *dto.MemberLevelAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.MemberLevel
 	entity.Name = req.Name
@@ -72,6 +75,9 @@ func (s *memberLevelService) Add(req *dto.MemberLevelAddReq, userId int) (int64,
 }
 
 func (s *memberLevelService) Update(req *dto.MemberLevelUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.MemberLevel{Id: req.Id}
 	has, err := entity.Get()
@@ -90,6 +96,9 @@ func (s *memberLevelService) Update(req *dto.MemberLevelUpdateReq, userId int) (
 }
 
 func (s *memberLevelService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {

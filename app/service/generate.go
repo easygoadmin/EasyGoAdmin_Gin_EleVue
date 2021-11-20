@@ -33,6 +33,7 @@ import (
 	"easygoadmin/utils/gconv"
 	"easygoadmin/utils/gfile"
 	"easygoadmin/utils/gstr"
+	"errors"
 	"github.com/gin-gonic/gin"
 	"html/template"
 	"io/ioutil"
@@ -72,6 +73,9 @@ func (s *generateService) GetList(req *dto.GeneratePageReq) ([]vo.GenerateInfo, 
 }
 
 func (s *generateService) Generate(ctx *gin.Context) error {
+	if utils.AppDebug() {
+		return errors.New("演示环境，暂无权限操作")
+	}
 	// 参数验证
 	var req *dto.GenerateFileReq
 	if err := ctx.ShouldBind(&req); err != nil {

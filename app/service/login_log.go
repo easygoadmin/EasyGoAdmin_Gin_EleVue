@@ -58,6 +58,9 @@ func (s *loginLogService) GetList(req *dto.LoginLogPageReq) ([]model.LoginLog, i
 }
 
 func (s *loginLogService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {

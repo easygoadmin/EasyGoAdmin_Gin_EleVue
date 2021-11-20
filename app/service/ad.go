@@ -90,6 +90,9 @@ func (s *adService) GetList(req *dto.AdPageReq) ([]vo.AdInfoVo, int64, error) {
 }
 
 func (s *adService) Add(req *dto.AdAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 实例化对象
 	var entity model.Ad
 	entity.Title = req.Title
@@ -125,6 +128,9 @@ func (s *adService) Add(req *dto.AdAddReq, userId int) (int64, error) {
 }
 
 func (s *adService) Update(req *dto.AdUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	entity := &model.Ad{Id: req.Id}
 	has, err := entity.Get()
@@ -165,6 +171,9 @@ func (s *adService) Update(req *dto.AdUpdateReq, userId int) (int64, error) {
 }
 
 func (s *adService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -182,6 +191,9 @@ func (s *adService) Delete(ids string) (int64, error) {
 }
 
 func (s *adService) Status(req *dto.AdStatusReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录是否存在
 	info := &model.Ad{Id: req.Id}
 	has, err := info.Get()

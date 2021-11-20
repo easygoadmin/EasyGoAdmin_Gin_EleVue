@@ -134,6 +134,9 @@ func (s *userService) GetList(req *dto.UserPageReq) ([]vo.UserInfoVo, int64, err
 }
 
 func (s *userService) Add(req *dto.UserAddReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	var entity model.User
 	entity.Realname = req.Realname
 	entity.Nickname = req.Nickname
@@ -181,6 +184,9 @@ func (s *userService) Add(req *dto.UserAddReq, userId int) (int64, error) {
 }
 
 func (s *userService) Update(req *dto.UserUpdateReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	entity := &model.User{Id: req.Id}
 	has, err := entity.Get()
 	if err != nil || !has {
@@ -250,6 +256,9 @@ func (s *userService) Update(req *dto.UserUpdateReq, userId int) (int64, error) 
 }
 
 func (s *userService) Delete(ids string) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -267,6 +276,9 @@ func (s *userService) Delete(ids string) (int64, error) {
 }
 
 func (s *userService) Status(req *dto.UserStatusReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询记录
 	info := &model.User{Id: req.Id}
 	has, err := info.Get()
@@ -328,6 +340,9 @@ func (s *userService) CheckUser(req *dto.CheckUserReq) (*model.User, error) {
 }
 
 func (s *userService) UpdateUserInfo(req *dto.UserInfoReq, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 头像处理
 	avatar := ""
 	if req.Avatar != "" {
@@ -358,6 +373,9 @@ func (s *userService) UpdateUserInfo(req *dto.UserInfoReq, userId int) (int64, e
 }
 
 func (s *userService) UpdatePwd(req *dto.UpdatePwd, userId int) (int64, error) {
+	if utils.AppDebug() {
+		return 0, errors.New("演示环境，暂无权限操作")
+	}
 	// 查询信息
 	info := &model.User{Id: userId}
 	has, err := info.Get()
