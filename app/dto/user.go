@@ -23,8 +23,6 @@
  */
 package dto
 
-import "time"
-
 // 用户分页查询条件
 type UserPageReq struct {
 	Username string `form:"username"` // 用户名
@@ -35,47 +33,47 @@ type UserPageReq struct {
 
 // 添加用户
 type UserAddReq struct {
-	Realname   string    `form:"realname" binding:"required"`
-	Nickname   string    `form:"nickname" binding:"required"`
-	Gender     int       `form:"gender" binding:"required"`
-	Avatar     string    `form:"avatar" binding:"required"`
-	Mobile     string    `form:"mobile" binding:"required"`
-	Email      string    `form:"email" binding:"required"`
-	Birthday   time.Time `form:"birthday" binding:"required"`
-	DeptId     int       `form:"dept_id" binding:"required"`
-	LevelId    int       `form:"level_id" binding:"required"`
-	PositionId int       `form:"position_id" binding:"required"`
-	City       []string  `form:"city" binding:"required"` // 省市区
-	Address    string    `form:"address"`
-	Username   string    `form:"username" binding:"required"`
-	Password   string    `form:"password"`
-	Intro      string    `form:"intro"`
-	Status     int       `form:"status" binding:"required"`
-	Note       string    `form:"note"`
-	Sort       int       `form:"sort" binding:"required"`
+	Realname   string   `form:"realname" binding:"required"`
+	Nickname   string   `form:"nickname" binding:"required"`
+	Gender     int      `form:"gender" binding:"required"`
+	Avatar     string   `form:"avatar" binding:"required"`
+	Mobile     string   `form:"mobile" binding:"required"`
+	Email      string   `form:"email" binding:"required"`
+	Birthday   int64    `form:"birthday" binding:"required"`
+	DeptId     int      `form:"dept_id" binding:"required"`
+	LevelId    int      `form:"level_id" binding:"required"`
+	PositionId int      `form:"position_id" binding:"required"`
+	City       []string `form:"city" binding:"required"` // 省市区
+	Address    string   `form:"address"`
+	Username   string   `form:"username" binding:"required"`
+	Password   string   `form:"password"`
+	Intro      string   `form:"intro"`
+	Status     int      `form:"status" binding:"required"`
+	Note       string   `form:"note"`
+	Sort       int      `form:"sort" binding:"required"`
 }
 
 // 更新用户
 type UserUpdateReq struct {
-	Id         int       `form:"id" binding:"required"`
-	Realname   string    `form:"realname" binding:"required"`
-	Nickname   string    `form:"nickname" binding:"required"`
-	Gender     int       `form:"gender" binding:"required"`
-	Avatar     string    `form:"avatar" binding:"required"`
-	Mobile     string    `form:"mobile" binding:"required"`
-	Email      string    `form:"email" binding:"required"`
-	Birthday   time.Time `form:"birthday" binding:"required"`
-	DeptId     int       `form:"dept_id" binding:"required"`
-	LevelId    int       `form:"level_id" binding:"required"`
-	PositionId int       `form:"position_id" binding:"required"`
-	City       []string  `form:"city" binding:"required"` // 省市区
-	Address    string    `form:"address"`
-	Username   string    `form:"username" binding:"required"`
-	Password   string    `form:"password"`
-	Intro      string    `form:"intro"`
-	Status     int       `form:"status" binding:"required"`
-	Note       string    `form:"note"`
-	Sort       int       `form:"sort" binding:"required"`
+	Id         int      `form:"id" binding:"required"`
+	Realname   string   `form:"realname" binding:"required"`
+	Nickname   string   `form:"nickname" binding:"required"`
+	Gender     int      `form:"gender" binding:"required"`
+	Avatar     string   `form:"avatar" binding:"required"`
+	Mobile     string   `form:"mobile" binding:"required"`
+	Email      string   `form:"email" binding:"required"`
+	Birthday   int64    `form:"birthday" binding:"required"`
+	DeptId     int      `form:"dept_id" binding:"required"`
+	LevelId    int      `form:"level_id" binding:"required"`
+	PositionId int      `form:"position_id" binding:"required"`
+	City       []string `form:"city" binding:"required"` // 省市区
+	Address    string   `form:"address"`
+	Username   string   `form:"username" binding:"required"`
+	Password   string   `form:"password"`
+	Intro      string   `form:"intro"`
+	Status     int      `form:"status" binding:"required"`
+	Note       string   `form:"note"`
+	Sort       int      `form:"sort" binding:"required"`
 }
 
 // 设置状态

@@ -34,6 +34,7 @@ import (
 	"net/http"
 	"reflect"
 	"regexp"
+	"time"
 )
 
 // 控制器管理对象
@@ -171,19 +172,18 @@ func (c *configWeb) Save(ctx *gin.Context) {
 		}
 
 		// 查询记录
-		info := &model.ConfigData{}
-		has, err := utils.XormDb.Where("code", key).Get(&info) //dao.ConfigData.FindOne("code=?", key)
+		var info model.ConfigData
+		has, err := utils.XormDb.Where("code=?", key).Get(&info)
 		if err != nil || !has {
 			continue
 		}
 
 		// 更新记录
-		itemVal := &model.ConfigData{}
-		itemVal.Value = gconv.String(val)
-		_, err2 := utils.XormDb.Where("code=?", key).Update(&itemVal)
-		if err2 != nil {
-			continue
-		}
+		entity := &model.ConfigData{Id: info.Id}
+		entity.Value = gconv.String(val)
+		entity.UpdateUser = utils.Uid(ctx)
+		entity.UpdateTime = time.Now().Unix()
+		entity.Update()
 	}
 
 	// 返回结果

@@ -141,7 +141,7 @@ func (s *userService) Add(req *dto.UserAddReq, userId int) (int64, error) {
 	entity.Avatar = req.Avatar
 	entity.Mobile = req.Mobile
 	entity.Email = req.Email
-	entity.Birthday = req.Birthday.Unix()
+	entity.Birthday = req.Birthday
 	entity.DeptId = req.DeptId
 	entity.LevelId = req.LevelId
 	entity.PositionId = req.PositionId
@@ -192,7 +192,7 @@ func (s *userService) Update(req *dto.UserUpdateReq, userId int) (int64, error) 
 	entity.Avatar = req.Avatar
 	entity.Mobile = req.Mobile
 	entity.Email = req.Email
-	entity.Birthday = req.Birthday.Unix()
+	entity.Birthday = req.Birthday
 	entity.DeptId = req.DeptId
 	entity.LevelId = req.LevelId
 	entity.PositionId = req.PositionId

@@ -100,8 +100,8 @@ func (s *adService) Add(req *dto.AdAddReq, userId int) (int64, error) {
 	entity.Url = req.Url
 	entity.Width = req.Width
 	entity.Height = req.Height
-	entity.StartTime = req.StartTime.Unix()
-	entity.EndTime = req.EndTime.Unix()
+	entity.StartTime = req.StartTime
+	entity.EndTime = req.EndTime
 	entity.Status = req.Status
 	entity.Sort = req.Sort
 	entity.CreateUser = userId
@@ -141,8 +141,8 @@ func (s *adService) Update(req *dto.AdUpdateReq, userId int) (int64, error) {
 	entity.Url = req.Url
 	entity.Width = req.Width
 	entity.Height = req.Height
-	entity.StartTime = req.StartTime.Unix()
-	entity.EndTime = req.EndTime.Unix()
+	entity.StartTime = req.StartTime
+	entity.EndTime = req.EndTime
 	entity.Status = req.Status
 	entity.Sort = req.Sort
 	entity.UpdateUser = userId
