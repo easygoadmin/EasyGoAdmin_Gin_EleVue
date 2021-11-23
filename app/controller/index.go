@@ -27,6 +27,7 @@ import (
 	"easygoadmin/app/dto"
 	"easygoadmin/app/model"
 	"easygoadmin/app/service"
+	"easygoadmin/app/vo"
 	"easygoadmin/utils"
 	"easygoadmin/utils/common"
 	"github.com/gin-gonic/gin"
@@ -62,13 +63,30 @@ func (c *indexCtl) User(ctx *gin.Context) {
 		})
 		return
 	}
-	// 头像
-	user.Avatar = utils.GetImageUrl(user.Avatar)
+
+	// 用户信息
+	var profile vo.ProfileInfoVo
+	profile.Realname = user.Realname
+	profile.Nickname = user.Nickname
+	profile.Avatar = utils.GetImageUrl(user.Avatar)
+	profile.Gender = user.Gender
+	profile.Mobile = user.Mobile
+	profile.Email = user.Email
+	profile.Intro = user.Intro
+	profile.Address = user.Address
+	// 角色
+	profile.Roles = make([]interface{}, 0)
+	// 权限
+	profile.Authorities = make([]interface{}, 0)
+	// 获取权限节点
+	permissionList := service.Menu.GetPermissionsList(utils.Uid(ctx))
+	profile.PermissionList = permissionList
+
 	// 返回结果
 	ctx.JSON(http.StatusOK, common.JsonResult{
 		Code: 0,
-		Msg:  "操作成功",
-		Data: user,
+		Msg:  "查询成功",
+		Data: profile,
 	})
 }
 

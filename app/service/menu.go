@@ -307,3 +307,23 @@ func makeTree(menu []model.Menu, tn *vo.MenuTreeNode) {
 		}
 	}
 }
+
+// 获取权限节点列表
+func (s *menuService) GetPermissionsList(userId int) []string {
+	if userId == 1 {
+		// 管理员,管理员拥有全部权限
+		permissionList := make([]string, 0)
+		utils.XormDb.Table("sys_menu").Cols("permission").Where("type=1").Where("mark=1").Find(&permissionList)
+		return permissionList
+	} else {
+		// 非管理员
+		permissionList := make([]string, 0)
+		utils.XormDb.Table("sys_menu").Alias("m").
+			Join("INNER", []string{"sys_role_menu", "r"}, "m.id = r.menu_id").
+			Join("INNER", []string{"sys_user_role", "ur"}, "ur.role_id=r.role_id").
+			Where("ur.user_id=? AND m.type=1 AND m.`status`=1 AND m.mark=1", userId).
+			Cols("m.permission").
+			Find(&permissionList)
+		return permissionList
+	}
+}

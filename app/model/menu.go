@@ -23,7 +23,7 @@ import (
 
 type Menu struct {
 	Id         int    `json:"id" xorm:"not null pk autoincr comment('主键ID') INT(11)"`
-	ParentId   int    `json:"parent_id" xorm:"not null default 0 comment('父级ID') index INT(11)"`
+	ParentId   int    `json:"parentId" xorm:"not null default 0 comment('父级ID') index INT(11)"`
 	Title      string `json:"title" xorm:"not null comment('菜单标题') index VARCHAR(30)"`
 	Icon       string `json:"icon" xorm:"default 'NULL' comment('图标') VARCHAR(50)"`
 	Path       string `json:"path" xorm:"default 'NULL' comment('菜单路径') VARCHAR(150)"`
