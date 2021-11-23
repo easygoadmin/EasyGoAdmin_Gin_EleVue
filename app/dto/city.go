@@ -37,8 +37,8 @@ type CityAddReq struct {
 	Citycode string `form:"citycode"`                       // 城市编号（区号）
 	PAdcode  string `form:"p_adcode"`                       // 父级地理编号
 	Adcode   string `form:"adcode"`                         // 地理编号
-	Lng      int    `form:"lng"`                            // 城市坐标中心点经度（* 1e6）：如果是中国，此值是 1e7
-	Lat      int    `form:"lat"`                            // 城市坐标中心点纬度（* 1e6）
+	Lng      string `form:"lng"`                            // 城市坐标中心点经度（* 1e6）：如果是中国，此值是 1e7
+	Lat      string `form:"lat"`                            // 城市坐标中心点纬度（* 1e6）
 	Sort     int    `form:"sort"`                           // 排序号
 }
 
@@ -51,8 +51,8 @@ type CityUpdateReq struct {
 	Citycode string `form:"citycode"`                       // 城市编号（区号）
 	PAdcode  string `form:"p_adcode"`                       // 父级地理编号
 	Adcode   string `form:"adcode"`                         // 地理编号
-	Lng      int    `form:"lng"`                            // 城市坐标中心点经度（* 1e6）：如果是中国，此值是 1e7
-	Lat      int    `form:"lat"`                            // 城市坐标中心点纬度（* 1e6）
+	Lng      string `form:"lng"`                            // 城市坐标中心点经度（* 1e6）：如果是中国，此值是 1e7
+	Lat      string `form:"lat"`                            // 城市坐标中心点纬度（* 1e6）
 	Sort     int    `form:"sort"`                           // 排序号
 }
 

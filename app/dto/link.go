@@ -43,13 +43,13 @@ type LinkAddReq struct {
 	Form     int    `form:"form"        binding:"required"` // 友链形式：1文字链接 2图片链接
 	Image    string `form:"image"`                          // 友链图片
 	Status   int    `form:"status"      binding:"required"` // 状态：1在用 2停用
-	Sort     int    `form:"sort"        binding:"required"` // 显示顺序
+	Sort     int    `form:"sort"`                           // 显示顺序
 	Note     string `form:"note"`                           // 备注
 }
 
 // 修改友链
 type LinkUpdateReq struct {
-	Id       int    `form:"id" v:"required#主键ID不能为空"`
+	Id       int    `form:"id" binding:"required"`
 	Name     string `form:"name"        binding:"required"` // 友链名称
 	Type     int    `form:"type"        binding:"required"` // 类型：1友情链接 2合作伙伴
 	Url      string `form:"url"`                            // 友链地址
@@ -59,7 +59,7 @@ type LinkUpdateReq struct {
 	Form     int    `form:"form"        binding:"required"` // 友链形式：1文字链接 2图片链接
 	Image    string `form:"image"`                          // 友链图片
 	Status   int    `form:"status"      binding:"required"` // 状态：1在用 2停用
-	Sort     int    `form:"sort"        binding:"required"` // 显示顺序
+	Sort     int    `form:"sort"`                           // 显示顺序
 	Note     string `form:"note"`                           // 备注
 }
 

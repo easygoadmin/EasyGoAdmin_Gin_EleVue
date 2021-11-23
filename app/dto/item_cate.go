@@ -39,7 +39,7 @@ type ItemCateAddReq struct {
 	Cover   string `form:"cover"`                          // 封面
 	Status  int    `form:"status"      binding:"required"` // 状态：1启用 2停用
 	Note    string `form:"note"`                           // 备注
-	Sort    int    `form:"sort"        binding:"required"` // 排序
+	Sort    int    `form:"sort"`                           // 排序
 }
 
 // 修改
@@ -54,5 +54,5 @@ type ItemCateUpdateReq struct {
 	Cover   string `form:"cover"`                          // 封面
 	Status  int    `form:"status"      binding:"required"` // 状态：1启用 2停用
 	Note    string `form:"note"`                           // 备注
-	Sort    int    `form:"sort"        binding:"required"` // 排序
+	Sort    int    `form:"sort"`                           // 排序
 }

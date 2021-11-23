@@ -50,7 +50,7 @@ type UserAddReq struct {
 	Intro      string   `form:"intro"`
 	Status     int      `form:"status" binding:"required"`
 	Note       string   `form:"note"`
-	Sort       int      `form:"sort" binding:"required"`
+	Sort       int      `form:"sort"`
 	RoleIds    []int    `form:"roleIds"` // 用户角色
 }
 
@@ -74,7 +74,7 @@ type UserUpdateReq struct {
 	Intro      string   `form:"intro"`
 	Status     int      `form:"status" binding:"required"`
 	Note       string   `form:"note"`
-	Sort       int      `form:"sort" binding:"required"`
+	Sort       int      `form:"sort"`
 	RoleIds    []int    `form:"roleIds"` // 用户角色
 }
 

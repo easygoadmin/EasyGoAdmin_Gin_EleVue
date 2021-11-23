@@ -39,7 +39,7 @@ type ConfigDataAddReq struct {
 	Options  string `form:"options"`                        // 配置项
 	ConfigId int    `form:"config_id"   binding:"required"` // 配置ID
 	Type     string `form:"type"        binding:"required"` // 配置类型
-	Sort     int    `form:"sort"        binding:"required"` // 排序
+	Sort     int    `form:"sort"`                           // 排序
 	Note     string `form:"note"`                           // 配置说明
 }
 
@@ -52,17 +52,12 @@ type ConfigDataUpdateReq struct {
 	Options  string `form:"options"`                        // 配置项
 	ConfigId int    `form:"config_id"   binding:"required"` // 配置ID
 	Type     string `form:"type"        binding:"required"` // 配置类型
-	Sort     int    `form:"sort"        binding:"required"` // 排序
+	Sort     int    `form:"sort"`                           // 排序
 	Note     string `form:"note"`                           // 配置说明
-}
-
-// 删除字典项
-type ConfigDataDeleteReq struct {
-	Ids string `form:"ids" v:"required#请选择需要删除的数据记录"`
 }
 
 // 设置状态
 type ConfigDataStatusReq struct {
-	Id     int `form:"id" v:"required#主键ID不能为空"`
-	Status int `form:"status"    v:"required#状态不能为空"`
+	Id     int `form:"id" binding:"required"`
+	Status int `form:"status"    binding:"required"`
 }

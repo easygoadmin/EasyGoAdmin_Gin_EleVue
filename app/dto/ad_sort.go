@@ -37,7 +37,7 @@ type AdSortAddReq struct {
 	CateId      int    `form:"cate_id"     binding:"required"` // 栏目ID
 	LocId       int    `form:"loc_id"      binding:"required"` // 广告页面位置
 	Platform    int    `form:"platform"    binding:"required"` // 站点类型：1PC网站 2WAP手机站 3微信小程序 4APP移动端
-	Sort        int    `form:"sort"        binding:"required"` // 广告位排序
+	Sort        int    `form:"sort"`                           // 广告位排序
 }
 
 // 更新广告位
@@ -48,5 +48,5 @@ type AdSortUpdateReq struct {
 	CateId      int    `form:"cate_id"     binding:"required"` // 栏目ID
 	LocId       int    `form:"loc_id"      binding:"required"` // 广告页面位置
 	Platform    int    `form:"platform"    binding:"required"` // 站点类型：1PC网站 2WAP手机站 3微信小程序 4APP移动端
-	Sort        int    `form:"sort"        binding:"required"` // 广告位排序
+	Sort        int    `form:"sort"`                           // 广告位排序
 }

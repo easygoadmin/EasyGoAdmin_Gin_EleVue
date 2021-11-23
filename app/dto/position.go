@@ -34,7 +34,7 @@ type PositionPageReq struct {
 type PositionAddReq struct {
 	Name   string `form:"name" binding:"required"`
 	Status int    `form:"status" binding:"required"`
-	Sort   int    `form:"sort" binding:"required"`
+	Sort   int    `form:"sort"`
 }
 
 // 更新岗位
@@ -42,7 +42,7 @@ type PositionUpdateReq struct {
 	Id     int    `form:"id" binding:"required"`
 	Name   string `form:"name" binding:"required"`
 	Status int    `form:"status" binding:"required"`
-	Sort   int    `form:"sort" binding:"required"`
+	Sort   int    `form:"sort"`
 }
 
 // 设置状态

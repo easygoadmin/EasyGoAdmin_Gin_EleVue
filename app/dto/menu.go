@@ -43,7 +43,7 @@ type MenuAddReq struct {
 	Status      int    `form:"status"      binding:"required"` // 状态：1正常 2禁用
 	Hide        int    `form:"hide"`                           // 是否可见：1是 2否
 	Note        string `form:"note"`                           // 菜单备注
-	Sort        int    `form:"sort"        binding:"required"` // 显示顺序
+	Sort        int    `form:"sort"`                           // 显示顺序
 	CheckedList []int  `form:"checkedList"`                    // 权限节点
 }
 
@@ -61,7 +61,7 @@ type MenuUpdateReq struct {
 	Status      int    `form:"status"      binding:"required"` // 是否显示：1显示 2不显示
 	Hide        int    `form:"hide"`                           // 是否可见：1是 2否
 	Note        string `form:"note"`                           // 菜单备注
-	Sort        int    `form:"sort"        binding:"required"` // 显示顺序
+	Sort        int    `form:"sort"`                           // 显示顺序
 	CheckedList []int  `form:"checkedList"`                    // 权限节点
 }
 

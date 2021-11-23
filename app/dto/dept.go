@@ -39,7 +39,7 @@ type DeptAddReq struct {
 	Fullname string `form:"fullname" binding:"required"`
 	Type     int    `form:"type" binding:"required"`
 	Pid      int    `form:"pid"`
-	Sort     int    `form:"sort" binding:"required"`
+	Sort     int    `form:"sort"`
 	Note     string
 }
 
@@ -51,7 +51,7 @@ type DeptUpdateReq struct {
 	Fullname string `form:"fullname" binding:"required"`
 	Type     int    `form:"type" binding:"required"`
 	Pid      int    `form:"pid"`
-	Sort     int    `form:"sort" binding:"required"`
+	Sort     int    `form:"sort"`
 	Note     string
 }
 

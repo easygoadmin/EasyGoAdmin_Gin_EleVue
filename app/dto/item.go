@@ -39,7 +39,7 @@ type ItemAddReq struct {
 	Image  string `form:"image"`                          // 站点图片
 	Status int    `form:"status"      binding:"required"` // 状态：1在用 2停用
 	Note   string `form:"note"`                           // 站点备注
-	Sort   int    `form:"sort"        binding:"required"` // 显示顺序
+	Sort   int    `form:"sort"`                           // 显示顺序
 }
 
 // 更新站点
@@ -51,7 +51,7 @@ type ItemUpdateReq struct {
 	Image  string `form:"image"`                          // 站点图片
 	Status int    `form:"status"      binding:"required"` // 状态：1在用 2停用
 	Note   string `form:"note"`                           // 站点备注
-	Sort   int    `form:"sort"        binding:"required"` // 显示顺序
+	Sort   int    `form:"sort"`                           // 显示顺序
 }
 
 // 设置状态

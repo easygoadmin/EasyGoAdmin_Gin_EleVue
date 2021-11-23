@@ -29,8 +29,8 @@ type City struct {
 	Citycode   string `json:"citycode" xorm:"not null comment('城市编号（区号）') VARCHAR(10)"`
 	PAdcode    string `json:"PAdcode" xorm:"default 'NULL' comment('父级地理编号') VARCHAR(10)"`
 	Adcode     string `json:"adcode" xorm:"default 'NULL' comment('地理编号') VARCHAR(10)"`
-	Lng        int    `json:"lng" xorm:"default NULL comment('城市坐标中心点经度（* 1e6）：如果是中国，此值是 1e7') INT(11)"`
-	Lat        int    `json:"lat" xorm:"default NULL comment('城市坐标中心点纬度（* 1e6）') INT(11)"`
+	Lng        string `json:"lng" xorm:"default 'NULL' comment('城市坐标中心点经度（* 1e6）：如果是中国，此值是 1e7') VARCHAR(10)""`
+	Lat        string `json:"lat" xorm:"default 'NULL' comment('城市坐标中心点纬度（* 1e6）') VARCHAR(10)""`
 	Sort       int    `json:"sort" xorm:"not null default 125 comment('排序号') TINYINT(3)"`
 	CreateUser int    `json:"create_user" xorm:"not null default 0 comment('添加人') INT(11)"`
 	CreateTime int64  `json:"create_time" xorm:"default 'NULL' comment('添加时间') DATETIME"`

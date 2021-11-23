@@ -37,7 +37,7 @@ type DictDataAddReq struct {
 	Code   string `form:"code"        binding:"required"` // 字典项值
 	DictId int    `form:"dict_id"     binding:"required"` // 字典类型ID
 	Note   string `form:"note"`                           // 备注
-	Sort   int    `form:"sort"        binding:"required"` // 显示顺序
+	Sort   int    `form:"sort"`                           // 显示顺序
 }
 
 // 更新字典项
@@ -47,5 +47,5 @@ type DictDataUpdateReq struct {
 	Code   string `form:"code"        binding:"required"` // 字典项值
 	DictId int    `form:"dict_id"     binding:"required"` // 字典类型ID
 	Note   string `form:"note"`                           // 备注
-	Sort   int    `form:"sort"        binding:"required"` // 显示顺序
+	Sort   int    `form:"sort"`                           // 显示顺序
 }
