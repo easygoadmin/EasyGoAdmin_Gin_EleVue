@@ -37,8 +37,8 @@
 
 ## 👷 开发者信息
 * 系统名称：EasyGoAdmin敏捷开发框架Gin+EleVue版本
-* 作者：半城风雨
-* 作者QQ：[1260211623](http://wpa.qq.com/msgrd?v=3&amp;uin=1260211623&amp;site=qq&amp;menu=yes)
+* 软件作者：半城风雨
+* 软件咨询：[1260211623](http://wpa.qq.com/msgrd?v=3&amp;uin=1260211623&amp;site=qq&amp;menu=yes)
 * 官网网址：[http://www.easygoadmin.vip](http://www.easygoadmin.vip)
 * 文档网址：[http://docs.gin.elevue.easygoadmin.vip](http://docs.gin.elevue.easygoadmin.vip)
 
