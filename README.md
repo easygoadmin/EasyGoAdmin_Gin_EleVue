@@ -39,12 +39,12 @@
 * 系统名称：EasyGoAdmin敏捷开发框架Gin+EleVue版本
 * 作者：半城风雨
 * 作者QQ：[1260211623](http://wpa.qq.com/msgrd?v=3&amp;uin=1260211623&amp;site=qq&amp;menu=yes)
-* 官网网址：[http://www.easygoadmin.vip/](http://easygoadmin.javaweb.vip/)
-* 文档网址：[http://docs.gin.ele.easygoadmin.vip/](http://docs.gin.ele.easygoadmin.vip/)
+* 官网网址：[http://www.easygoadmin.vip](http://www.easygoadmin.vip)
+* 文档网址：[http://docs.gin.elevue.easygoadmin.vip](http://docs.gin.elevue.easygoadmin.vip)
 
 ## 🎨 系统演示
 
-+ 演示地址：http://gin.ele.rxthink.cn
++ 演示地址：http://manage.gin.elevue.easygoadmin.vip
 
 账号 | 密码| 操作权限
 ---|---|---
