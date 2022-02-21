@@ -162,7 +162,7 @@ Iris+AntdVue前后端分离版 | 采用Iris、Vue、AntDesign等框架研发前�
 
 本项目包含的第三方源码和二进制文件之版权信息另行标注。
 
-版权所有Copyright © 2019~2021 [easygoadmin.vip](http://www.easygoadmin.vip)
+版权所有Copyright © 2019~2022 [easygoadmin.vip](http://www.easygoadmin.vip)
 
 All rights reserved。
 
