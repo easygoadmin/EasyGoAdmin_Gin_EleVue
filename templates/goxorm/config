@@ -1,7 +1,0 @@
-lang=go
-genJson=1
-prefix=sys_
-ignoreColumnsJSON=
-created=
-updated=
-deleted=
