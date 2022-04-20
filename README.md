@@ -37,6 +37,7 @@
 
 ## 🎨 系统演示
 
++ 软件版本：EasyGoAdmin敏捷开发框架Gin+EleVue版本
 + 演示地址：http://manage.gin.elevue.easygoadmin.vip
 
 账号 | 密码| 操作权限
