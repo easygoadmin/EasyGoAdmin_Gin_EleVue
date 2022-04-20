@@ -35,13 +35,6 @@
 + 代码生成：一键生成模块CRUD的功能，包括后端Go和前端Vue等相关代码。
 + 案例演示：常规代码生成器一键生成后的演示案例。
 
-## 👷 开发者信息
-* 系统名称：EasyGoAdmin敏捷开发框架Gin+EleVue版本
-* 软件作者：@半城风雨
-* 软件出处：深圳EasyGoAdmin研发中心
-* 官网网址：[http://www.easygoadmin.vip](http://www.easygoadmin.vip)
-* 文档网址：[http://docs.gin.elevue.easygoadmin.vip](http://docs.gin.elevue.easygoadmin.vip)
-
 ## 🎨 系统演示
 
 + 演示地址：http://manage.gin.elevue.easygoadmin.vip
