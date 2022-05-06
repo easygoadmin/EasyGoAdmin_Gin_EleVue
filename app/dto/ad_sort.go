@@ -21,9 +21,9 @@ package dto
 
 // 列表查询条件
 type AdSortPageReq struct {
-	Description string `form:"name"`  // 广告位描述
-	Page        int    `form:"page"`  // 页码
-	Limit       int    `form:"limit"` // 每页数
+	Description string `form:"description"` // 广告位描述
+	Page        int    `form:"page"`        // 页码
+	Limit       int    `form:"limit"`       // 每页数
 }
 
 // 添加广告位

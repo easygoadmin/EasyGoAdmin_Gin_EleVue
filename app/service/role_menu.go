@@ -70,9 +70,6 @@ func (s *roleMenuService) Save(req *dto.RoleMenuSaveReq) error {
 	if utils.AppDebug() {
 		return errors.New("演示环境，暂无权限操作")
 	}
-	if utils.AppDebug() {
-		return errors.New("演示环境，暂无权限操作")
-	}
 	itemArr := req.MenuIds
 	if len(itemArr) == 0 {
 		return errors.New("请选择权限节点")

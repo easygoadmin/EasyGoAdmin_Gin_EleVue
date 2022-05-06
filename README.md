@@ -35,9 +35,17 @@
 + 代码生成：一键生成模块CRUD的功能，包括后端Go和前端Vue等相关代码。
 + 案例演示：常规代码生成器一键生成后的演示案例。
 
+## 👷 软件信息
+* 软件名称：EasyGoAdmin敏捷开发框架Gin+EleVue版本
+* 软件作者：@半城风雨
+* 软件出处：深圳EasyGoAdmin研发中心
+* 软件协议：LGPL-3.0
+* 官网网址：[http://www.easygoadmin.vip](http://www.easygoadmin.vip)
+* 文档网址：[http://docs.gin.elevue.easygoadmin.vip](http://docs.gin.elevue.easygoadmin.vip)
+
+
 ## 🎨 系统演示
 
-+ 软件版本：EasyGoAdmin敏捷开发框架Gin+EleVue版本
 + 演示地址：http://manage.gin.elevue.easygoadmin.vip
 
 账号 | 密码| 操作权限
@@ -143,5 +151,7 @@ Iris+AntdVue前后端分离版 | 采用Iris、Vue、AntDesign等框架研发前�
 本软件框架禁止任何单位和个人用于任何违法、侵害他人合法利益等恶意的行为，禁止用于任何违反我国法律法规的一切平台研发，任何单位和个人使用本软件框架用于产品研发而产生的任何意外、疏忽、合约毁坏、诽谤、版权或知识产权侵犯及其造成的损失 (包括但不限于直接、间接、附带或衍生的损失等)，本团队不承担任何法律责任。本软件框架只能用于公司和个人内部的法律所允许的合法合规的软件产品研发，详细声明内容请阅读《框架免责声明》附件；
 
 本项目包含的第三方源码和二进制文件之版权信息另行标注。
+
+版权所有Copyright © 2019~2022 [easygoadmin.vip](http://www.easygoadmin.vip) All rights reserved。
 
 更多细节参阅 [LICENSE](LICENSE)
