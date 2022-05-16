@@ -121,6 +121,7 @@ func (s *adService) Add(req *dto.AdAddReq, userId int) (int64, error) {
 	entity.EndTime = req.EndTime
 	entity.Status = req.Status
 	entity.Sort = req.Sort
+	entity.Note = req.Note
 	entity.CreateUser = userId
 	entity.CreateTime = time.Now().Unix()
 	entity.Mark = 1
@@ -168,6 +169,7 @@ func (s *adService) Update(req *dto.AdUpdateReq, userId int) (int64, error) {
 	entity.EndTime = req.EndTime
 	entity.Status = req.Status
 	entity.Sort = req.Sort
+	entity.Note = req.Note
 	entity.UpdateUser = userId
 	entity.UpdateTime = time.Now().Unix()
 

@@ -24,7 +24,7 @@
 /**
  * 演示一管理-服务类
  * @author 半城风雨
- * @since 2021-11-19
+ * @since 2022-05-16
  * @File : example
  */
 package service
@@ -49,10 +49,35 @@ func (s *exampleService) GetList(req *dto.ExamplePageReq) ([]vo.ExampleInfoVo, i
 	// 初始化查询实例
 	query := utils.XormDb.Where("mark=1")
 	if req != nil {
-		// 职级名称查询
+		
+		// 测试名称
+		
 		if req.Name != "" {
-			query = query.Where("name like ?", "%"+req.Name+"%")
+			query = query.Where("name like ?", req.Name)
 		}
+		
+	
+		// 状态：1正常 2停用
+		
+		if req.Status > 0 {
+			query = query.Where("status=?", req.Status)
+		}
+		
+	
+		// 类型：1京东 2淘宝 3拼多多 4唯品会
+		
+		if req.Type > 0 {
+			query = query.Where("type=?", req.Type)
+		}
+		
+	
+		// 是否VIP：1是 2否
+		
+		if req.IsVip > 0 {
+			query = query.Where("is_vip=?", req.IsVip)
+		}
+		
+	
 	}
 	// 排序
 	query = query.Asc("sort")
@@ -68,12 +93,18 @@ func (s *exampleService) GetList(req *dto.ExamplePageReq) ([]vo.ExampleInfoVo, i
 	for _, v := range list {
 		item := vo.ExampleInfoVo{}
 		item.Example = v
-
+		
+		
+		
 		// 头像
 		if v.Avatar != "" {
 			item.Avatar = utils.GetImageUrl(v.Avatar)
 		}
-
+		
+		
+		
+		
+		
 		result = append(result, item)
 	}
 
@@ -82,12 +113,9 @@ func (s *exampleService) GetList(req *dto.ExamplePageReq) ([]vo.ExampleInfoVo, i
 }
 
 func (s *exampleService) Add(req *dto.ExampleAddReq, userId int) (int64, error) {
-	if utils.AppDebug() {
-		return 0, errors.New("演示环境，暂无权限操作")
-	}
 	// 实例化对象
 	var entity model.Example
-
+	
 	entity.Name = req.Name
 	// 头像处理
 	if req.Avatar != "" {
@@ -110,16 +138,13 @@ func (s *exampleService) Add(req *dto.ExampleAddReq, userId int) (int64, error) 
 }
 
 func (s *exampleService) Update(req *dto.ExampleUpdateReq, userId int) (int64, error) {
-	if utils.AppDebug() {
-		return 0, errors.New("演示环境，暂无权限操作")
-	}
 	// 查询记录
 	entity := &model.Example{Id: req.Id}
 	has, err := entity.Get()
 	if err != nil || !has {
 		return 0, errors.New("记录不存在")
 	}
-
+	
 	entity.Name = req.Name
 	// 头像处理
 	if req.Avatar != "" {
@@ -142,9 +167,6 @@ func (s *exampleService) Update(req *dto.ExampleUpdateReq, userId int) (int64, e
 
 // 删除
 func (s *exampleService) Delete(ids string) (int64, error) {
-	if utils.AppDebug() {
-		return 0, errors.New("演示环境，暂无权限操作")
-	}
 	// 记录ID
 	idsArr := strings.Split(ids, ",")
 	if len(idsArr) == 1 {
@@ -161,10 +183,15 @@ func (s *exampleService) Delete(ids string) (int64, error) {
 	}
 }
 
+
+
+
+
+
+
+
+
 func (s *exampleService) Status(req *dto.ExampleStatusReq, userId int) (int64, error) {
-	if utils.AppDebug() {
-		return 0, errors.New("演示环境，暂无权限操作")
-	}
 	// 查询记录是否存在
 	info := &model.Example{Id: req.Id}
 	has, err := info.Get()
@@ -181,10 +208,11 @@ func (s *exampleService) Status(req *dto.ExampleStatusReq, userId int) (int64, e
 	return entity.Update()
 }
 
+
+
+
+
 func (s *exampleService) IsVip(req *dto.ExampleIsVipReq, userId int) (int64, error) {
-	if utils.AppDebug() {
-		return 0, errors.New("演示环境，暂无权限操作")
-	}
 	// 查询记录是否存在
 	info := &model.Example{Id: req.Id}
 	has, err := info.Get()
@@ -200,3 +228,7 @@ func (s *exampleService) IsVip(req *dto.ExampleIsVipReq, userId int) (int64, err
 	entity.UpdateTime = time.Now().Unix()
 	return entity.Update()
 }
+
+
+
+

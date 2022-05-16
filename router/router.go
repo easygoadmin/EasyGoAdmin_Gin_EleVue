@@ -326,6 +326,7 @@ func init() {
 	{
 		generate.GET("/list", controller.Generate.List)
 		generate.POST("/generate", controller.Generate.Generate)
+		generate.POST("/batchGenerate", controller.Generate.BatchGenerate)
 	}
 
 	/* 演示一 */

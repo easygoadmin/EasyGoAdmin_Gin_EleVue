@@ -39,6 +39,11 @@ type GeneratePageReq struct {
 
 // 生成文件
 type GenerateFileReq struct {
-	Name    string `form:"name"`    // 表名称
-	Comment string `form:"comment"` // 表描述
+	Name    string `form:"name" binding:"required"`    // 表名称
+	Comment string `form:"comment" binding:"required"` // 表描述
+}
+
+// 批量生成文件
+type BatchGenerateFileReq struct {
+	Tables string `form:"tables" binding:"required"` // 表名称
 }
