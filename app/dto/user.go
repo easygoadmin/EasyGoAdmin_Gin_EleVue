@@ -1,4 +1,14 @@
 // +----------------------------------------------------------------------
+// | EasyGoAdmin敏捷开发框架 [ 赋能开发者，助力企业发展 ]
+// +----------------------------------------------------------------------
+// | 版权所有 2019~2022 深圳EasyGoAdmin研发中心
+// +----------------------------------------------------------------------
+// | Licensed LGPL-3.0 EasyGoAdmin并不是自由软件，未经许可禁止去掉相关版权
+// +----------------------------------------------------------------------
+// | 官方网站: http://www.easygoadmin.vip
+// +----------------------------------------------------------------------
+// | Author: @半城风雨 团队荣誉出品
+// +----------------------------------------------------------------------
 // | 版权和免责声明:
 // | 本团队对该软件框架产品拥有知识产权（包括但不限于商标权、专利权、著作权、商业秘密等）
 // | 均受到相关法律法规的保护，任何个人、组织和单位不得在未经本团队书面授权的情况下对所授权
@@ -22,7 +32,7 @@ package dto
 // 用户分页查询条件
 type UserPageReq struct {
 	Username string `form:"username"` // 用户名
-	Gender   int    `form:gender`     // 性别
+	Gender   int    `form:"gender"`   // 性别
 	Page     int    `form:"page"`     // 页码
 	Limit    int    `form:"limit"`    // 每页数
 }
@@ -77,7 +87,7 @@ type UserUpdateReq struct {
 // 设置状态
 type UserStatusReq struct {
 	Id     int `form:"id" binding:"required"`
-	Status int `form:"status"    binding:"required"`
+	Status int `form:"status" binding:"required"`
 }
 
 // 重置密码
@@ -92,19 +102,19 @@ type CheckUserReq struct {
 
 // 更新密码
 type UpdatePwd struct {
-	OldPassword string `form:"oldPassword"      binding:"required"` // 旧密码
-	NewPassword string `form:"newPassword"      binding:"required"` // 新密码
-	RePassword  string `form:"rePassword"       binding:"required"` // 确认密码
+	OldPassword string `form:"oldPassword" binding:"required"` // 旧密码
+	NewPassword string `form:"newPassword" binding:"required"` // 新密码
+	RePassword  string `form:"rePassword" binding:"required"`  // 确认密码
 }
 
 // 用户中心
 type UserInfoReq struct {
-	Avatar   string `form:"avatar"`                           // 头像
-	Realname string `form:"realname"      binding:"required"` // 真实姓名
-	Nickname string `form:"nickname"      binding:"required"` // 昵称
-	Gender   int    `form:"gender"        binding:"required"` // 性别:1男 2女 3保密
-	Mobile   string `form:"mobile"        binding:"required"` // 手机号码
-	Email    string `form:"email"         binding:"required"` // 邮箱地址
-	Address  string `form:"address"`                          // 详细地址
-	Intro    string `form:"intro"`                            // 个人简介
+	Avatar   string `form:"avatar"`                      // 头像
+	Realname string `form:"realname" binding:"required"` // 真实姓名
+	Nickname string `form:"nickname" binding:"required"` // 昵称
+	Gender   int    `form:"gender" binding:"required"`   // 性别:1男 2女 3保密
+	Mobile   string `form:"mobile" binding:"required"`   // 手机号码
+	Email    string `form:"email" binding:"required"`    // 邮箱地址
+	Address  string `form:"address"`                     // 详细地址
+	Intro    string `form:"intro"`                       // 个人简介
 }

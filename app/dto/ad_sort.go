@@ -1,4 +1,14 @@
 // +----------------------------------------------------------------------
+// | EasyGoAdmin敏捷开发框架 [ 赋能开发者，助力企业发展 ]
+// +----------------------------------------------------------------------
+// | 版权所有 2019~2022 深圳EasyGoAdmin研发中心
+// +----------------------------------------------------------------------
+// | Licensed LGPL-3.0 EasyGoAdmin并不是自由软件，未经许可禁止去掉相关版权
+// +----------------------------------------------------------------------
+// | 官方网站: http://www.easygoadmin.vip
+// +----------------------------------------------------------------------
+// | Author: @半城风雨 团队荣誉出品
+// +----------------------------------------------------------------------
 // | 版权和免责声明:
 // | 本团队对该软件框架产品拥有知识产权（包括但不限于商标权、专利权、著作权、商业秘密等）
 // | 均受到相关法律法规的保护，任何个人、组织和单位不得在未经本团队书面授权的情况下对所授权
@@ -29,10 +39,10 @@ type AdSortPageReq struct {
 // 添加广告位
 type AdSortAddReq struct {
 	Description string `form:"description" binding:"required"` // 广告位描述
-	ItemId      int    `form:"item_id"     binding:"required"` // 站点ID
-	CateId      int    `form:"cate_id"     binding:"required"` // 栏目ID
-	LocId       int    `form:"loc_id"      binding:"required"` // 广告页面位置
-	Platform    int    `form:"platform"    binding:"required"` // 站点类型：1PC网站 2WAP手机站 3微信小程序 4APP移动端
+	ItemId      int    `form:"item_id" binding:"required"`     // 站点ID
+	CateId      int    `form:"cate_id" binding:"required"`     // 栏目ID
+	LocId       int    `form:"loc_id" binding:"required"`      // 广告页面位置
+	Platform    int    `form:"platform" binding:"required"`    // 站点类型：1PC网站 2WAP手机站 3微信小程序 4APP移动端
 	Sort        int    `form:"sort"`                           // 广告位排序
 }
 
@@ -40,9 +50,9 @@ type AdSortAddReq struct {
 type AdSortUpdateReq struct {
 	Id          int    `form:"id" binding:"required"`
 	Description string `form:"description" binding:"required"` // 广告位描述
-	ItemId      int    `form:"item_id"     binding:"required"` // 站点ID
-	CateId      int    `form:"cate_id"     binding:"required"` // 栏目ID
-	LocId       int    `form:"loc_id"      binding:"required"` // 广告页面位置
-	Platform    int    `form:"platform"    binding:"required"` // 站点类型：1PC网站 2WAP手机站 3微信小程序 4APP移动端
+	ItemId      int    `form:"item_id" binding:"required"`     // 站点ID
+	CateId      int    `form:"cate_id" binding:"required"`     // 栏目ID
+	LocId       int    `form:"loc_id" binding:"required"`      // 广告页面位置
+	Platform    int    `form:"platform" binding:"required"`    // 站点类型：1PC网站 2WAP手机站 3微信小程序 4APP移动端
 	Sort        int    `form:"sort"`                           // 广告位排序
 }

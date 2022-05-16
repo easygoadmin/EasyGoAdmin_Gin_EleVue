@@ -1,4 +1,14 @@
 // +----------------------------------------------------------------------
+// | EasyGoAdmin敏捷开发框架 [ 赋能开发者，助力企业发展 ]
+// +----------------------------------------------------------------------
+// | 版权所有 2019~2022 深圳EasyGoAdmin研发中心
+// +----------------------------------------------------------------------
+// | Licensed LGPL-3.0 EasyGoAdmin并不是自由软件，未经许可禁止去掉相关版权
+// +----------------------------------------------------------------------
+// | 官方网站: http://www.easygoadmin.vip
+// +----------------------------------------------------------------------
+// | Author: @半城风雨 团队荣誉出品
+// +----------------------------------------------------------------------
 // | 版权和免责声明:
 // | 本团队对该软件框架产品拥有知识产权（包括但不限于商标权、专利权、著作权、商业秘密等）
 // | 均受到相关法律法规的保护，任何个人、组织和单位不得在未经本团队书面授权的情况下对所授权
@@ -66,7 +76,13 @@ func (s *noticeService) GetList(req *dto.NoticePageReq) ([]vo.NoticeInfoVo, int6
 	for _, v := range list {
 		item := vo.NoticeInfoVo{}
 		item.Notice = v
+		// 通知来源
 		item.SourceName = common.NOTICE_SOURCE_LIST[v.Source]
+
+		// 富文本图片替换处理
+		if v.Content != "" {
+			item.Content = strings.ReplaceAll(v.Content, "[IMG_URL]", utils.ImageUrl())
+		}
 		result = append(result, item)
 	}
 	return result, count, nil
@@ -76,10 +92,12 @@ func (s *noticeService) Add(req *dto.NoticeAddReq, userId int) (int64, error) {
 	if utils.AppDebug() {
 		return 0, errors.New("演示环境，暂无权限操作")
 	}
+	// 富文本处理
+	content := utils.SaveImageContent(req.Content, req.Title, "notice")
 	// 实例化对象
 	var entity model.Notice
 	entity.Title = req.Title
-	entity.Content = req.Content
+	entity.Content = content
 	entity.IsTop = req.IsTop
 	entity.Source = req.Source
 	entity.Status = req.Status
@@ -102,9 +120,12 @@ func (s *noticeService) Update(req *dto.NoticeUpdateReq, userId int) (int64, err
 		return 0, err
 	}
 
+	// 富文本处理
+	content := utils.SaveImageContent(req.Content, req.Title, "notice")
+
 	// 设置参数
 	entity.Title = req.Title
-	entity.Content = req.Content
+	entity.Content = content
 	entity.IsTop = req.IsTop
 	entity.Source = req.Source
 	entity.Status = req.Status

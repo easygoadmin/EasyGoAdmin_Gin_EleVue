@@ -1,4 +1,14 @@
 // +----------------------------------------------------------------------
+// | EasyGoAdmin敏捷开发框架 [ 赋能开发者，助力企业发展 ]
+// +----------------------------------------------------------------------
+// | 版权所有 2019~2022 深圳EasyGoAdmin研发中心
+// +----------------------------------------------------------------------
+// | Licensed LGPL-3.0 EasyGoAdmin并不是自由软件，未经许可禁止去掉相关版权
+// +----------------------------------------------------------------------
+// | 官方网站: http://www.easygoadmin.vip
+// +----------------------------------------------------------------------
+// | Author: @半城风雨 团队荣誉出品
+// +----------------------------------------------------------------------
 // | 版权和免责声明:
 // | 本团队对该软件框架产品拥有知识产权（包括但不限于商标权、专利权、著作权、商业秘密等）
 // | 均受到相关法律法规的保护，任何个人、组织和单位不得在未经本团队书面授权的情况下对所授权
@@ -30,44 +40,44 @@ type MemberPageReq struct {
 // 添加会员
 type MemberAddReq struct {
 	Username    string   `form:"username,unique" binding:"required"` // 用户名
-	Password    string   `form:"password"		  binding:"required"`     // 登录密码
-	MemberLevel int      `form:"member_level"    binding:"required"` // 会员等级
-	Realname    string   `form:"realname"        binding:"required"` // 真实姓名
-	Nickname    string   `form:"nickname"        binding:"required"` // 用户昵称
-	Gender      int      `form:"gender"          binding:"required"` // 性别（1男 2女 3未知）
-	Avatar      string   `form:"avatar"          binding:"required"` // 用户头像
-	Birthday    int64    `form:"birthday"        binding:"required"` // 出生日期
-	City        []string `form:"city"		  	  binding:"required"`      // 省市区
-	Address     string   `form:"address"         binding:"required"` // 详细地址
+	Password    string   `form:"password" binding:"required"`        // 登录密码
+	MemberLevel int      `form:"member_level" binding:"required"`    // 会员等级
+	Realname    string   `form:"realname" binding:"required"`        // 真实姓名
+	Nickname    string   `form:"nickname" binding:"required"`        // 用户昵称
+	Gender      int      `form:"gender" binding:"required"`          // 性别（1男 2女 3未知）
+	Avatar      string   `form:"avatar" binding:"required"`          // 用户头像
+	Birthday    int64    `form:"birthday" binding:"required"`        // 出生日期
+	City        []string `form:"city" binding:"required"`            // 省市区
+	Address     string   `form:"address" binding:"required"`         // 详细地址
 	Intro       string   `form:"intro"`                              // 个人简介
 	Signature   string   `form:"signature"`                          // 个性签名
-	Device      int      `form:"device"          binding:"required"` // 设备类型：1苹果 2安卓 3WAP站 4PC站 5后台添加
-	Source      int      `form:"source"          binding:"required"` // 来源：1、APP注册；2、后台添加；
-	Status      int      `form:"status"          binding:"required"` // 是否启用 1、启用  2、停用
+	Device      int      `form:"device" binding:"required"`          // 设备类型：1苹果 2安卓 3WAP站 4PC站 5后台添加
+	Source      int      `form:"source" binding:"required"`          // 来源：1、APP注册；2、后台添加；
+	Status      int      `form:"status" binding:"required"`          // 是否启用 1、启用  2、停用
 }
 
 // 更新会员
 type MemberUpdateReq struct {
 	Id          int      `form:"id" binding:"required"`
 	Username    string   `form:"username,unique" binding:"required"` // 用户名
-	Password    string   `form:"password"		  binding:"required"`     // 登录密码
-	MemberLevel int      `form:"member_level"    binding:"required"` // 会员等级
-	Realname    string   `form:"realname"        binding:"required"` // 真实姓名
-	Nickname    string   `form:"nickname"        binding:"required"` // 用户昵称
-	Gender      int      `form:"gender"          binding:"required"` // 性别（1男 2女 3未知）
-	Avatar      string   `form:"avatar"          binding:"required"` // 用户头像
-	Birthday    int64    `form:"birthday"        binding:"required"` // 出生日期
-	City        []string `form:"city"		  	  binding:"required"`      // 省市区
-	Address     string   `form:"address"         binding:"required"` // 详细地址
+	Password    string   `form:"password" binding:"required"`        // 登录密码
+	MemberLevel int      `form:"member_level" binding:"required"`    // 会员等级
+	Realname    string   `form:"realname" binding:"required"`        // 真实姓名
+	Nickname    string   `form:"nickname" binding:"required"`        // 用户昵称
+	Gender      int      `form:"gender" binding:"required"`          // 性别（1男 2女 3未知）
+	Avatar      string   `form:"avatar" binding:"required"`          // 用户头像
+	Birthday    int64    `form:"birthday" binding:"required"`        // 出生日期
+	City        []string `form:"city" binding:"required"`            // 省市区
+	Address     string   `form:"address" binding:"required"`         // 详细地址
 	Intro       string   `form:"intro"`                              // 个人简介
 	Signature   string   `form:"signature"`                          // 个性签名
-	Device      int      `form:"device"          binding:"required"` // 设备类型：1苹果 2安卓 3WAP站 4PC站 5后台添加
-	Source      int      `form:"source"          binding:"required"` // 来源：1、APP注册；2、后台添加；
-	Status      int      `form:"status"          binding:"required"` // 是否启用 1、启用  2、停用
+	Device      int      `form:"device" binding:"required"`          // 设备类型：1苹果 2安卓 3WAP站 4PC站 5后台添加
+	Source      int      `form:"source" binding:"required"`          // 来源：1、APP注册；2、后台添加；
+	Status      int      `form:"status" binding:"required"`          // 是否启用 1、启用  2、停用
 }
 
 // 设置状态
 type MemberStatusReq struct {
-	Id     int `form:"id"        binding:"required"`
-	Status int `form:"status"    binding:"required"`
+	Id     int `form:"id" binding:"required"`
+	Status int `form:"status" binding:"required"`
 }

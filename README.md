@@ -37,12 +37,11 @@
 
 ## 👷 软件信息
 * 软件名称：EasyGoAdmin敏捷开发框架Gin+EleVue版本
-* 软件作者：@半城风雨
+* 软件作者：@半城风雨 团队荣誉出品
 * 软件出处：深圳EasyGoAdmin研发中心
 * 软件协议：LGPL-3.0
 * 官网网址：[http://www.easygoadmin.vip](http://www.easygoadmin.vip)
 * 文档网址：[http://docs.gin.elevue.easygoadmin.vip](http://docs.gin.elevue.easygoadmin.vip)
-
 
 ## 🎨 系统演示
 

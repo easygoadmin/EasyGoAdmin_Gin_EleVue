@@ -1,4 +1,14 @@
 // +----------------------------------------------------------------------
+// | EasyGoAdmin敏捷开发框架 [ 赋能开发者，助力企业发展 ]
+// +----------------------------------------------------------------------
+// | 版权所有 2019~2022 深圳EasyGoAdmin研发中心
+// +----------------------------------------------------------------------
+// | Licensed LGPL-3.0 EasyGoAdmin并不是自由软件，未经许可禁止去掉相关版权
+// +----------------------------------------------------------------------
+// | 官方网站: http://www.easygoadmin.vip
+// +----------------------------------------------------------------------
+// | Author: @半城风雨 团队荣誉出品
+// +----------------------------------------------------------------------
 // | 版权和免责声明:
 // | 本团队对该软件框架产品拥有知识产权（包括但不限于商标权、专利权、著作权、商业秘密等）
 // | 均受到相关法律法规的保护，任何个人、组织和单位不得在未经本团队书面授权的情况下对所授权
@@ -169,72 +179,58 @@ func setPermission(menuType int, checkedList []int, name string, url string, par
 				entity.Title = "查询" + moduleTitle
 				entity.Path = "/" + moduleName + "/list"
 				entity.Permission = "sys:" + moduleName + ":list"
-				entity.Method = "GET"
 			} else if value == 5 {
 				entity.Title = "添加" + moduleTitle
 				entity.Path = "/" + moduleName + "/add"
 				entity.Permission = "sys:" + moduleName + ":add"
-				entity.Method = "POST"
 			} else if value == 10 {
 				entity.Title = "修改" + moduleTitle
 				entity.Path = "/" + moduleName + "/update"
 				entity.Permission = "sys:" + moduleName + ":update"
-				entity.Method = "PUT"
 			} else if value == 15 {
 				entity.Title = "删除" + moduleTitle
 				entity.Path = "/" + moduleName + "/delete"
 				entity.Permission = "sys:" + moduleName + ":delete"
-				entity.Method = "DELETE"
 			} else if value == 20 {
 				entity.Title = moduleTitle + "详情"
 				entity.Path = "/" + moduleName + "/detail"
 				entity.Permission = "sys:" + moduleName + ":detail"
-				entity.Method = "GET"
 			} else if value == 25 {
 				entity.Title = "设置状态"
 				entity.Path = "/" + moduleName + "/status"
 				entity.Permission = "sys:" + moduleName + ":status"
-				entity.Method = "PUT"
 			} else if value == 30 {
 				entity.Title = "批量删除"
 				entity.Path = "/" + moduleName + "/dall"
 				entity.Permission = "sys:" + moduleName + ":dall"
-				entity.Method = "DELETE"
 			} else if value == 35 {
 				entity.Title = "添加子级"
 				entity.Path = "/" + moduleName + "/addz"
 				entity.Permission = "sys:" + moduleName + ":addz"
-				entity.Method = "POST"
 			} else if value == 40 {
 				entity.Title = "全部展开"
 				entity.Path = "/" + moduleName + "/expand"
 				entity.Permission = "sys:" + moduleName + ":expand"
-				entity.Method = "GET"
 			} else if value == 45 {
 				entity.Title = "全部折叠"
 				entity.Path = "/" + moduleName + "/collapse"
 				entity.Permission = "sys:" + moduleName + ":collapse"
-				entity.Method = "GET"
 			} else if value == 50 {
 				entity.Title = "导出" + moduleTitle
 				entity.Path = "/" + moduleName + "/export"
 				entity.Permission = "sys:" + moduleName + ":export"
-				entity.Method = "GET"
 			} else if value == 55 {
 				entity.Title = "导入" + moduleTitle
 				entity.Path = "/" + moduleName + "/import"
 				entity.Permission = "sys:" + moduleName + ":import"
-				entity.Method = "GET"
 			} else if value == 60 {
 				entity.Title = "分配权限"
 				entity.Path = "/" + moduleName + "/permission"
 				entity.Permission = "sys:" + moduleName + ":permission"
-				entity.Method = "POST"
 			} else if value == 65 {
 				entity.Title = "重置密码"
 				entity.Path = "/" + moduleName + "/resetPwd"
 				entity.Permission = "sys:" + moduleName + ":resetPwd"
-				entity.Method = "PUT"
 			}
 			entity.ParentId = parentId
 			entity.Type = 1

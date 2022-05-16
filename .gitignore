@@ -23,3 +23,4 @@ go.sum
 .svn
 evui/
 app/service/generate.go
+go_build_main_go.exe
